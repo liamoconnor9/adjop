@@ -1,0 +1,604 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.5.30)  20 FEB 2024 22:43
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**/home/liamo/invmod/main_rev.tex
+(/home/liamo/invmod/main_rev.tex
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-01-21> (/usr/share/texlive/texmf-dist/tex/latex/revtex/revtex4-2.cls
+Document Class: revtex4-2 2020/10/03 4.2e (https://journals.aps.org/revtex/ for documentation)
+ Copyright (c) 2019 American Physical Society.
+ mailto:revtex@aps.org
+ Licensed under the LPPL:
+http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt
+ Arthur Ogawa <arthur_ogawa at sbcglobal dot net>
+ Based on work by David Carlisle <david at dcarlisle.demon.co.uk>
+ Version (4.2d,4.2e): Modified by Mark Doyle and Phelype Oleinik
+ .
+ltxutil[2020/10/03 4.2e utilities package (portions licensed from W. E. Baxter web at superscript.com)]
+LaTeX Info: Redefining \@centercr on input line 356.
+Class revtex4-2 Info: Repairing hyperref-unfriendly LaTeX definition of \mpfootnote on input line 481.
+Class revtex4-2 Info: Repairing broken LateX \@sect on input line 803.
+\intertabularlinepenalty=\count185
+\@tbpen=\count186
+\@arstrutbox@hline=\box50
+Class revtex4-2 Info: Repairing broken LaTeX \@xbitor on input line 1834.
+Class revtex4-2 Info: Making \typeout \long on input line 2099.
+ltxfront[2020/10/03 4.2e frontmatter package (AO,DPC,MD)]
+\c@affil=\count187
+\c@collab=\count188
+\absbox=\box51
+ltxgrid[2020/10/03 4.2e page grid package (portions licensed from W. E. Baxter web at superscript.com)]
+\c@linecount=\count189
+\output@latex=\toks16
+\box@size@1=\box52
+\box@size@2=\box53
+\@protection@box=\box54
+\@topmark@saved=\toks17
+\footins@saved=\box55
+\footins@recovered=\box56
+\column@recovered=\box57
+\pagesofar=\box58
+\footsofar=\box59
+\pagegrid@col=\count190
+Class revtex4-2 Info: Overriding \@vspace, \@vspacer, \@no@pgbk, \@newline, and \\  on input line 5665.
+\c@part=\count191
+\c@section=\count192
+\c@subsection=\count193
+\c@subsubsection=\count194
+\c@paragraph=\count195
+\c@subparagraph=\count196
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\c@figure=\count197
+\fbox@1=\box60
+\c@table=\count198
+\fbox@2=\box61
+\c@video=\count199
+\fbox@4=\box62
+\@bibdataout=\write3
+\widetext@top=\box63
+\widetext@bot=\box64
+Class revtex4-2 Info: Selecting society aps on input line 7658.
+(/usr/share/texlive/texmf-dist/tex/latex/revtex/aps4-2.rtx
+File: aps4-2 2020/10/03 4.2e (https://journals.aps.org/revtex/ for documentation)
+Class revtex4-2 Info: RevTeX society APS selected on input line 40.
+)
+Class revtex4-2 Info: Selecting journal pre on input line 7660.
+Class revtex4-2 Info: APS journal PRE selected on input line 7661.
+ (/usr/share/texlive/texmf-dist/tex/latex/revtex/aps10pt4-2.rtx
+File: aps10pt4-2 2020/10/03 4.2e (https://journals.aps.org/revtex/ for documentation)
+Class revtex4-2 Info: RevTeX pointsize 10pt selected on input line 39.
+) (/usr/share/texlive/texmf-dist/tex/latex/textcase/textcase.sty
+Package: textcase 2019/09/14 v1.00 Text only upper/lower case changing (DPC)
+) (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks18
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2021/10/15 v2.17l AMS math features
+\@mathmargin=\skip49
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+ (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks19
+\ex@=\dimen138
+)
+LaTeX Info: Redefining \text on input line 28.
+) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen139
+) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2021/08/26 v2.02 operator names
+)
+\inf@bad=\count266
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count267
+\leftroot@=\count268
+LaTeX Info: Redefining \overline on input line 399.
+\classnum@=\count269
+\DOTSCASE@=\count270
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box65
+\strutbox@=\box66
+\big@size=\dimen140
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count271
+\c@MaxMatrixCols=\count272
+\dotsspace@=\muskip16
+\c@parentequation=\count273
+\dspbrk@lvl=\count274
+\tag@help=\toks20
+\row@=\count275
+\column@=\count276
+\maxfields@=\count277
+\andhelp@=\toks21
+\eqnshift@=\dimen141
+\alignsep@=\dimen142
+\tagshift@=\dimen143
+\tagwidth@=\dimen144
+\totwidth@=\dimen145
+\lineht@=\dimen146
+\@envbody=\toks22
+\multlinegap=\skip50
+\multlinetaggap=\skip51
+\mathdisplay@stack=\toks23
+LaTeX Info: Redefining \[ on input line 2938.
+LaTeX Info: Redefining \] on input line 2939.
+) (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+) (/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip52
+\bibsep=\skip53
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count278
+)
+Class revtex4-2 Info: Repairing natbib's \BibitemShut on input line 7665.
+ (/usr/share/texlive/texmf-dist/tex/latex/revtex/revsymb4-2.sty
+Package: revsymb4-2 2020/10/03 4.2e (https://journals.aps.org/revtex/ for documentation)
+LaTeX Info: Redefining \frak on input line 104.
+LaTeX Info: Redefining \Bbb on input line 120.
+LaTeX Info: Redefining \REV@mathfrak on input line 128.
+)) (/usr/share/texlive/texmf-dist/tex/generic/soul/soul.sty
+Package: soul 2003/11/17 v2.4 letterspacing/underlining (mf)
+\SOUL@word=\toks24
+\SOUL@lasttoken=\toks25
+\SOUL@cmds=\toks26
+\SOUL@buffer=\toks27
+\SOUL@token=\toks28
+\SOUL@spaceskip=\skip54
+\SOUL@ttwidth=\dimen147
+\SOUL@uldp=\dimen148
+\SOUL@ulht=\dimen149
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks29
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen150
+\Gin@req@width=\dimen151
+) (/usr/share/texlive/texmf-dist/tex/latex/tools/dcolumn.sty
+Package: dcolumn 2014/10/28 v1.06 decimal alignment package (DPC)
+ (/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
+\col@sep=\dimen152
+\ar@mcellbox=\box67
+\extrarowheight=\dimen153
+\NC@list=\toks30
+\extratabsurround=\skip55
+\backup@length=\skip56
+\ar@cellbox=\box68
+)) (/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty
+Package: bm 2021/04/25 v1.2e Bold Symbol Support (DPC/FMi)
+\symboldoperators=\mathgroup6
+\symboldletters=\mathgroup7
+\symboldsymbols=\mathgroup8
+Package bm Info: No bold for \OMX/cmex/m/n, using \pmb.
+Package bm Info: No bold for \U/msa/m/n, using \pmb.
+Package bm Info: No bold for \U/msb/m/n, using \pmb.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 149.
+LaTeX Info: Redefining \bm on input line 218.
+) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2021/10/31 v2.13 LaTeX color extensions (UK)
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 227.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1352.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1356.
+Package xcolor Info: Model `RGB' extended on input line 1368.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1370.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1371.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1374.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1375.
+)
+Class revtex4-2 Info: Unrecognized array package. Please update this document class! (Proceeding with fingers crossed.) on input line 100.
+Class revtex4-2 Info: cite was not loaded (OK!) on input line 100.
+Class revtex4-2 Info: mcite was not loaded (OK!) on input line 100.
+Class revtex4-2 Info: multicol was not loaded (OK!) on input line 100.
+ (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count279
+\l__pdf_internal_box=\box69
+) (./main_rev.aux)
+\openout1 = `main_rev.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+ (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count280
+\scratchdimen=\dimen154
+\scratchbox=\box70
+\nofMPsegments=\count281
+\nofMParguments=\count282
+\everyMPshowfont=\toks31
+\MPscratchCnt=\count283
+\MPscratchDim=\dimen155
+\MPnumerator=\count284
+\makeMPintoPDFobject=\count285
+\everyMPtoPDFconversion=\toks32
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+))
+\openout3 = `main_revNotes.bib'.
+
+LaTeX Font Info:    Trying to load font information for U+msa on input line 130.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 130.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+Underfull \hbox (badness 1655) in paragraph at lines 141--149
+[]\OT1/cmr/m/n/10 Despite po-ten-tial dif-fi-cul-ties, ret-ro-spec-tive in-verse
+ []
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (3.19635pt too wide) in paragraph at lines 189--197
+[] [][][][][][] 
+ []
+
+
+Underfull \hbox (badness 2181) in paragraph at lines 259--267
+\OT1/cmr/m/n/10 provides a con-cise con-text for demon-strat-ing each
+ []
+
+[2]
+
+pdfTeX warning: pdflatex (file ./loop.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<loop.pdf, id=22, 1286.40598pt x 1416.49196pt>
+File: loop.pdf Graphic file (type pdf)
+<use loop.pdf>
+Package pdftex.def Info: loop.pdf  used on input line 271.
+(pdftex.def)             Requested size: 252.94499pt x 278.5167pt.
+
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 271--272
+ [][] 
+ []
+
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 304--313
+[][][][][][] 
+ []
+
+
+Underfull \hbox (badness 2418) in paragraph at lines 314--319
+[]\OT1/cmr/m/n/10 Once $\OMS/cmsy/m/n/10 J[]$\OT1/cmr/m/n/10 's gra-di-ent is known, we use gra-di-ent
+ []
+
+
+Underfull \hbox (badness 2042) in paragraph at lines 314--319
+\OT1/cmr/m/n/10 de-scent with the pop-u-lar Barzilai--Borwein method
+ []
+
+
+Underfull \hbox (badness 1342) in paragraph at lines 314--319
+\OT1/cmr/m/n/10 [[]] to se-lect step sizes. In ad-di-tion to gra-di-ent
+ []
+
+
+Underfull \hbox (badness 2980) in paragraph at lines 314--319
+\OT1/cmr/m/n/10 de-scent, we also min-i-mize $\OMS/cmsy/m/n/10 J[]$ \OT1/cmr/m/n/10 us-ing the second-
+ []
+
+
+Underfull \hbox (badness 7081) in paragraph at lines 314--319
+\OT1/cmr/m/n/10 order sparse L-BFGS al-go-rithm [[]] which uti-
+ []
+
+
+Underfull \hbox (badness 2486) in paragraph at lines 314--319
+\OT1/cmr/m/n/10 lizes the gra-di-ent's his-tory over sev-eral it-er-a-tions.
+ []
+
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 314--319
+[][][][][][] 
+ []
+
+[3 <./loop.pdf>]
+<all.pdf, id=52, 284.56313pt x 135.50626pt>
+File: all.pdf Graphic file (type pdf)
+<use all.pdf>
+Package pdftex.def Info: all.pdf  used on input line 387.
+(pdftex.def)             Requested size: 361.34999pt x 172.08893pt.
+
+Underfull \hbox (badness 1675) in paragraph at lines 407--417
+\OT1/cmr/m/n/10 non-lin-ear ad-vec-tive term is eval-u-ated ex-plic-itly by
+ []
+
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 407--417
+[][][][][][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 407--417
+\OT1/cmr/m/n/10 For ev-ery solve we use a 2nd-order Runge--
+ []
+
+
+Underfull \hbox (badness 1776) in paragraph at lines 407--417
+\OT1/cmr/m/n/10 Kutta scheme with a fixed timestep $^^A\OML/cmm/m/it/10 t \OT1/cmr/m/n/10 = 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 01$.
+ []
+
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 407--417
+[][][][][][] 
+ []
+
+<legend_kdvb.pdf, id=53, 507.70976pt x 19.4326pt>
+File: legend_kdvb.pdf Graphic file (type pdf)
+<use legend_kdvb.pdf>
+Package pdftex.def Info: legend_kdvb.pdf  used on input line 427.
+(pdftex.def)             Requested size: 361.34999pt x 13.83102pt.
+<PLTD/all.pdf, id=54, 513.11702pt x 317.12373pt>
+File: PLTD/all.pdf Graphic file (type pdf)
+<use PLTD/all.pdf>
+Package pdftex.def Info: PLTD/all.pdf  used on input line 428.
+(pdftex.def)             Requested size: 361.34999pt x 223.33514pt.
+[4]
+Overfull \hbox (3.19635pt too wide) in paragraph at lines 482--488
+[] [][][][][][] 
+ []
+
+<diff_plot/approx.pdf, id=59, 289.08pt x 178.66127pt>
+File: diff_plot/approx.pdf Graphic file (type pdf)
+<use diff_plot/approx.pdf>
+Package pdftex.def Info: diff_plot/approx.pdf  used on input line 493.
+(pdftex.def)             Requested size: 252.94499pt x 156.3282pt.
+
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 493--497
+ [][] 
+ []
+
+[5 <./all.pdf>]
+<PLTC/all.pdf, id=112, 289.08pt x 158.99399pt>
+File: PLTC/all.pdf Graphic file (type pdf)
+<use PLTC/all.pdf>
+Package pdftex.def Info: PLTC/all.pdf  used on input line 507.
+(pdftex.def)             Requested size: 252.94499pt x 139.11938pt.
+
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 507--511
+ [][] 
+ []
+
+[6 <./legend_kdvb.pdf> <./PLTD/all.pdf> <./diff_plot/approx.pdf>]
+
+LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix] on input line 536.
+
+
+Overfull \hbox (5.38498pt too wide) detected at line 548
+[]
+ []
+
+
+Underfull \hbox (badness 2635) in paragraph at lines 579--585
+\OT1/cmr/m/n/10 the de-vi-a-tion of a trial vari-able from its tar-get,
+ []
+
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 579--585
+[][][][][][] 
+ []
+
+[7 <./PLTC/all.pdf>]
+Overfull \hbox (6.0pt too wide) in paragraph at lines 604--606
+[][][][][][] 
+ []
+
+<Truesmolwrite000200.png, id=283, 2722.17pt x 2547.5175pt>
+File: Truesmolwrite000200.png Graphic file (type png)
+<use Truesmolwrite000200.png>
+Package pdftex.def Info: Truesmolwrite000200.png  used on input line 611.
+(pdftex.def)             Requested size: 252.94499pt x 236.69122pt.
+
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 611--612
+ [][] 
+ []
+
+<Falsesmolwrite000200.png, id=284, 2722.17pt x 2547.5175pt>
+File: Falsesmolwrite000200.png Graphic file (type png)
+<use Falsesmolwrite000200.png>
+Package pdftex.def Info: Falsesmolwrite000200.png  used on input line 656.
+(pdftex.def)             Requested size: 252.94499pt x 236.69122pt.
+
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 656--657
+ [][] 
+ []
+
+<qdev.pdf, id=285, 289.08pt x 178.66127pt>
+File: qdev.pdf Graphic file (type pdf)
+<use qdev.pdf>
+Package pdftex.def Info: qdev.pdf  used on input line 682.
+(pdftex.def)             Requested size: 252.94499pt x 156.3282pt.
+
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 682--683
+ [][] 
+ []
+
+[8 <./Truesmolwrite000200.png (PNG copy)>]
+
+LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix] on input line 697.
+
+<PLT20DQ/both.pdf, id=291, 289.08pt x 158.99399pt>
+File: PLT20DQ/both.pdf Graphic file (type pdf)
+<use PLT20DQ/both.pdf>
+Package pdftex.def Info: PLT20DQ/both.pdf  used on input line 700.
+(pdftex.def)             Requested size: 252.94499pt x 139.11938pt.
+
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 700--701
+ [][] 
+ []
+
+<PLT200DQ/both.pdf, id=292, 289.08pt x 158.99399pt>
+File: PLT200DQ/both.pdf Graphic file (type pdf)
+<use PLT200DQ/both.pdf>
+Package pdftex.def Info: PLT200DQ/both.pdf  used on input line 717.
+(pdftex.def)             Requested size: 252.94499pt x 139.11938pt.
+
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 717--718
+ [][] 
+ []
+
+[9 <./Falsesmolwrite000200.png (PNG copy)> <./qdev.pdf> <./PLT20DQ/both.pdf>]
+
+LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix] on input line 747.
+
+
+Underfull \hbox (badness 1946) in paragraph at lines 789--800
+\OT1/cmr/m/n/10 24[] can-not be solved back-wards us-ing con-ven-tional
+ []
+
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 789--800
+[][][][][][] 
+ []
+
+[10 <./PLT200DQ/both.pdf>]
+Underfull \hbox (badness 1960) in paragraph at lines 835--845
+[]\OT1/cmr/m/n/10 Our first in-verse prob-lem is con-strained by the
+ []
+
+
+Underfull \hbox (badness 2393) in paragraph at lines 876--884
+[]\OT1/cmr/m/n/10 Optimal con-trol via DAL is the most com-mon
+ []
+
+
+Underfull \hbox (badness 1062) in paragraph at lines 876--884
+\OT1/cmr/m/n/10 ap-proach for ret-ro-spec-tive in-verse prob-lems. How-
+ []
+
+
+Underfull \hbox (badness 1102) in paragraph at lines 876--884
+\OT1/cmr/m/n/10 ever, SBI and QRM are more ef-fec-tive than DAL
+ []
+
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 876--884
+[][][][][][]
+ []
+
+
+Underfull \hbox (badness 1430) in paragraph at lines 876--884
+\OT1/cmr/m/n/10 are lim-ited by our abil-ity to in-cor-po-rate real-time
+ []
+
+[11]
+File: legend_kdvb.pdf Graphic file (type pdf)
+<use legend_kdvb.pdf>
+Package pdftex.def Info: legend_kdvb.pdf  used on input line 958.
+(pdftex.def)             Requested size: 361.34999pt x 13.83102pt.
+<PLTD/sall.pdf, id=435, 513.11702pt x 317.12373pt>
+File: PLTD/sall.pdf Graphic file (type pdf)
+<use PLTD/sall.pdf>
+Package pdftex.def Info: PLTD/sall.pdf  used on input line 959.
+(pdftex.def)             Requested size: 361.34999pt x 223.33514pt.
+<sapprox/PLTC/all.pdf, id=436, 289.08pt x 158.99399pt>
+File: sapprox/PLTC/all.pdf Graphic file (type pdf)
+<use sapprox/PLTC/all.pdf>
+Package pdftex.def Info: sapprox/PLTC/all.pdf  used on input line 991.
+(pdftex.def)             Requested size: 252.94499pt x 139.11938pt.
+
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 991--994
+ [][] 
+ []
+
+<PLT20DS/both.pdf, id=437, 289.08pt x 158.99399pt>
+File: PLT20DS/both.pdf Graphic file (type pdf)
+<use PLT20DS/both.pdf>
+Package pdftex.def Info: PLT20DS/both.pdf  used on input line 1012.
+(pdftex.def)             Requested size: 252.94499pt x 139.11938pt.
+
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 1012--1013
+ [][] 
+ []
+
+<PLT200DS/both.pdf, id=438, 289.08pt x 158.99399pt>
+File: PLT200DS/both.pdf Graphic file (type pdf)
+<use PLT200DS/both.pdf>
+Package pdftex.def Info: PLT200DS/both.pdf  used on input line 1019.
+(pdftex.def)             Requested size: 252.94499pt x 139.11938pt.
+
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 1019--1020
+ [][] 
+ []
+
+(./main_rev.bbl [12] [13 <./PLTD/sall.pdf> <./sapprox/PLTC/all.pdf> <./PLT20DS/both.pdf> <./PLT200DS/both.pdf>]
+Underfull \hbox (badness 1168) in paragraph at lines 193--198
+ []\OT1/cmr/m/n/9 T. Frerix, D. Kochkov, J. A. Smith, D. Cre-mers,
+ []
+
+
+Underfull \hbox (badness 1490) in paragraph at lines 314--324
+ \OT1/cmr/m/n/9 141 (1988), https://academic.oup.com/imajna/article-
+ []
+
+)
+
+Class revtex4-2 Warning: Command \address is obsolete;
+Use \affiliation instead.
+
+[14] (./main_rev.aux) ) 
+Here is how much of TeX's memory you used:
+ 5751 strings out of 478287
+ 80821 string characters out of 5849289
+ 419479 words of memory out of 5000000
+ 23871 multiletter control sequences out of 15000+600000
+ 480440 words of font info for 69 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 69i,13n,76p,1265b,397s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on main_rev.pdf (14 pages, 2272048 bytes).
+PDF statistics:
+ 735 PDF objects out of 1000 (max. 8388607)
+ 355 compressed objects within 4 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 76 words of extra memory for PDF output out of 10000 (max. 10000000)
+

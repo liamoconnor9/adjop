@@ -1,0 +1,164 @@
+\relax 
+\citation{Lukyanenko2021}
+\citation{Subramanian2020}
+\citation{Kabanikhin2020}
+\citation{Liu2008,Li2017}
+\citation{Lukyanenko2021,Subramanian2020,Kabanikhin2020,Liu2008,Li2017}
+\citation{Imanuvilov1997}
+\citation{Fan2009}
+\citation{Fan2009}
+\citation{Fan2010}
+\citation{Du2013}
+\citation{Law2012}
+\citation{Fan2020,FrerixThomas2021VDAw,Zhao2022,mowlavi_optimal_2023}
+\newlabel{FirstPage}{{}{1}{}{}{}}
+\@writefile{toc}{\contentsline {title}{Iterative Methods for Navier--Stokes Inverse Problems}{1}{}}
+\@writefile{toc}{\contentsline {abstract}{Abstract}{1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{}}
+\newlabel{secintro}{{I}{1}{}{}{}}
+\newlabel{genintro}{{1}{1}{}{}{}}
+\newlabel{costintro}{{2}{1}{}{}{}}
+\citation{Mannix2022discrete}
+\citation{Du2013}
+\citation{qrmsource}
+\citation{Conrad2003}
+\citation{Liu2008}
+\citation{Li2017}
+\citation{Fang2012}
+\citation{darde2016}
+\citation{Nguyen2022}
+\citation{imanuvilov_2022}
+\newlabel{costoutro}{{3}{2}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Overview of Methods}{2}{}}
+\newlabel{secmethods}{{II}{2}{}{}{}}
+\newlabel{kdvb}{{4}{2}{}{}{}}
+\citation{Steiner2012}
+\citation{10.1093/imanum/8.1.141}
+\citation{doi:10.1137/0916069}
+\citation{Note2}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Direct Adjoint-Looping (DAL)}{3}{}}
+\newlabel{secDAL}{{II\,A}{3}{}{}{}}
+\newlabel{for}{{6}{3}{}{}{}}
+\newlabel{fc}{{7}{3}{}{}{}}
+\newlabel{adj}{{8}{3}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Conceptual illustration of iterative methods. Purple: the target solution $\overline  {u}(x, t)$ is known only at the final time $t_f$. Blue: we evolve a trial state $u(x, 0)$ to $u(x, t_f)$ where we then initialize one of three backward integration systems using a single compatibility condition. Each backward integration gives a solution at $t=0$ which we use to update our trial initial condition. We seek the trial solution's deviation $u'=u-\overline  {u}$ at the initial time $t=0$. Yellow: Direct Adjoint Looping (DAL) is a linear backward integration. For advective systems such as KdVB and Navier--Stokes, DAL advects the final deviation $u'(x,t_f)$ by the trial solution $u$. Orange: Simple Backward Integration (SBI) is a hybrid method, which supplements the linear DAL system with two additional advective terms. Red: the Quasi-Reversible Method (QRM) aims to compute the deviation by introducing a small hyperdiffusive term with coefficient $\varepsilon $. The QRM backward integration is ill-posed when $\varepsilon =0$ and numerically unstable as $\varepsilon \searrow 0$.}}{3}{}}
+\newlabel{adj_diag}{{1}{3}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}SBI and QRM Setup}{3}{}}
+\newlabel{secsetup}{{II\,B}{3}{}{}{}}
+\citation{Note3}
+\citation{Burns2020}
+\newlabel{burgpert}{{9}{4}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Simple Backward Integration (SBI)}{4}{}}
+\newlabel{secSBI}{{II\,C}{4}{}{}{}}
+\newlabel{sbibi}{{10}{4}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D}Quasi-Reversible Method (QRM)}{4}{}}
+\newlabel{secQRM}{{II\,D}{4}{}{}{}}
+\newlabel{qrmbi}{{11}{4}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {III}KdVB Numerical Experiments}{4}{}}
+\newlabel{seckdvb}{{III}{4}{}{}{}}
+\newlabel{kdvbic}{{12}{4}{}{}{}}
+\citation{Nabi2022}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Target KdVB solution $\overline  {u}(x,t)$ (left) plotted as a function of space $x$ and time $t$. We aim to recover the initial condition of a nonlinear wave which propagates right at an initial speed of one. The problem's spatial domain is 1D periodic. We include diffusion ($a=0.04$) such that its speed decreases as the wave propagates. Beginning at $t=3\pi $, SBI (center) evolves $\overline  {u}(x,t_f)$ backward to $t=0$ by reversing the sign of the diffusive term. The wave diffuses during the forward and backward integrations, such that its amplitude and speed of propagation decrease in both directions. We also perform the QRM backward integration (right) on $t:3\pi \to 0$. Unlike SBI, QRM repopulates small-scale modes which are lost during forward integration. As the wave's peak regains its former amplitude, its speed of propagation increases mimicking $\overline  {u}(x,t)$. }}{5}{}}
+\newlabel{targy}{{2}{5}{}{}{}}
+\citation{Li2017}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Evolution of the KdVB trial initial conditions $u_n(x,0)$ using an initial guess $u_0(x,0)=0$ (shown in green). We compare two DAL runs (top row) with SBI (bottom left) and QRM (bottom right). (Top left) gradient descent approaches the target initial state gradually. (Top right) DAL minimization of $\mathcal  {J}^{u}_f$ using L-BFGS approaches the target state more rapidly, but this method introduces undesired medium-scale features. SBI captures the target state faster and more directly than DAL. QRM resembles the target state immediately $(n=1)$. However, this method introduces low-amplitude small-scale errors which do not subside at $n=200$. }}{6}{}}
+\newlabel{kdvevo}{{3}{6}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces \color@box {}{lime}{[NEW FIGURE]} Deviation of SBI and QRM trial initial conditions, plotted as a function of $x$ at iteration $n=200$. Both curves have prominent peaks which overlap near $x=\pi $. The SBI deviation has a slightly larger magnitude while the QRM deviation oscillates at a particular wavenumber.}}{6}{}}
+\newlabel{kdvb_diff}{{4}{6}{}{}{}}
+\citation{Burns2020}
+\citation{Kerswell2014}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Initial errors ($\mathcal  {J}^{u}_0$, top) and final errors ($\mathcal  {J}^{u}_f$, bottom) for the 1D KdVB inverse problem plotted as a function of iteration $n$. We compare DAL, SBI, and QRM. DAL performs slightly better when paired with the second-order sparse minimization routine L-BFGS (LB $\mathcal  {J}^{u}_f$), whereas gradient descent (GD $\mathcal  {J}^{u}_f$) performs the worst. Our iterative applications of SBI and QRM minimize $\mathcal  {J}^{u}_0$ and $\mathcal  {J}^{u}_f$ more effectively than DAL. QRM minimizes both $\mathcal  {J}^{u}_0$ and $\mathcal  {J}^{u}_f$ more rapidly than SBI.}}{7}{}}
+\newlabel{kdvb_optimize}{{5}{7}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}2D Navier--Stokes Numerical Experiments}{7}{}}
+\newlabel{secNS}{{IV}{7}{}{}{}}
+\newlabel{2dns}{{13}{7}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}DAL}{7}{}}
+\newlabel{NSdal}{{IV\,A}{7}{}{}{}}
+\newlabel{nsadj}{{15}{7}{}{}{}}
+\newlabel{Jw}{{17}{7}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}SBI and QRM}{7}{}}
+\newlabel{NSsbiqrm}{{IV\,B}{7}{}{}{}}
+\newlabel{nspert}{{18}{7}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Results}{8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Target (top row) and trial vorticity snapshots in the upper half of the domain at simulation times $t=0,5,10,20$. The second, third, and bottom row trial solutions are obtained by applying DAL over 200 iterations. GD $\mathcal  {J}^{\bm  {u}}_f$ (second row) uses gradient descent to minimize $\mathcal  {J}^{\bm  {u}}_f$. For this case, we use double resolution in space and time (256 by 512 modes, $\Delta t=0.001$) to ensure that each simulation is resolved. Despite this extra resolution, we observe symmetry breaking when $t\geq 5$ due to numerical errors. LB $\mathcal  {J}^{\bm  {u}}_f$ (third row) uses L-BFGS to minimize $\mathcal  {J}^{\bm  {u}}_f$ with the default resolution. Although the initial condition is under-resolved in this case, we still recover a final state which resembles the target. GD $\mathcal  {J}^{\omega }_f$ (bottom row) uses gradient descent to minimize $\mathcal  {J}^{\omega }_f$. The DAL trial initial conditions (bottom three rows) have small-scale banded features with high concentrations of positive vorticity. Their final states have varying degrees of resemblance to the target at $t=20$. }}{8}{}}
+\newlabel{snapshots200}{{6}{8}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Same as Figure 6{}{}{}\hbox {} using the SBI and QRM iterative methods. Despite the ill-conditioning which hinders DAL in Figure 6{}{}{}\hbox {}, SBI and QRM both recover the target initial condition (top left) to a greater extent. SBI1 and SBI200 (middle two rows) denote SBI trial states after 1 and 200 iterations respectively. The QRM initial state (bottom left) loosely resembles the target initial condition at $n=200$.}}{9}{}}
+\newlabel{snapshots200_sbi}{{7}{9}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Velocity error $\mathcal  {J}^{\bm  {u}}(t)\equiv \frac  {1}{2}\leavevmode@ifvmode {\setbox \z@ \hbox {\mathsurround \z@ $\nulldelimiterspace \z@ \left \langle \vcenter to\@ne \big@size {}\right .$}\box \z@ }|\bm  {u}(\bm  {x},t)-\bm  {\overline  {u}}(\bm  {x},t)|^2\leavevmode@ifvmode {\setbox \z@ \hbox {\mathsurround \z@ $\nulldelimiterspace \z@ \left \rangle \vcenter to\@ne \big@size {}\right .$}\box \z@ }$ vs.\nobreakspace  {}time of Navier--Stokes trial solutions at iteration $n=200$. GD $\mathcal  {J}^{\bm  {u}}_f$ and LB $\mathcal  {J}^{\bm  {u}}_f$ denote DAL minimization of $\mathcal  {J}^{\bm  {u}}_f$ via gradient descent and L-BFGS respectively. SBI200 and QRM denote the trial solutions refined by SBI and QRM respectively. Every trial solution's error descreases nonmonotonically with respect to time. QRM has the smallest error at the initial and final times, though SBI200 has less error over large intervals in the time domain.}}{9}{}}
+\newlabel{traces}{{8}{9}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Initial (top, $\mathcal  {J}^{\bm  {u}}_0$) and final (bottom, $\mathcal  {J}^{\bm  {u}}_f$) velocity errors for the 2D Navier--Stokes inverse problem over 20 iterations starting with an initial guess $\bm  {u}^0(\bm  {x}, 0)=\bm  {0}$. We compare how Direct Adjoint Looping (DAL), Simple Backward Integration (SBI), and the Quasi-Reversible Method (QRM) minimize these errors. For DAL we compute the gradients of $\mathcal  {J}^{\bm  {u}}_f$ and $\mathcal  {J}^{\omega }_f$ (shown black and grey). Using the gradient of $\mathcal  {J}^{\bm  {u}}_f$, we implement gradient descent and L-BFGS (solid black and solid grey respectively). $\mathcal  {J}^{\bm  {u}}_f$ decreases rapidly when SBI and QRM are used. Their respective performances are comparable in the first 20 iterations. }}{9}{}}
+\newlabel{shearstudyq}{{9}{9}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Same as Figure 9{}{}{}\hbox {} extended over 200 loops. DAL minimization of $\mathcal  {J}^{\omega }_f$ (dotted black) is ineffective in terms of both $\mathcal  {J}^{\bm  {u}}_0$ (top) and $\mathcal  {J}^{\bm  {u}}_f$ (bottom). After the initial 20 iterations, every other method decreases $\mathcal  {J}^{\bm  {u}}_0$ by less than an order of magnitude. DAL minimization of $\mathcal  {J}^{\bm  {u}}_f$ using L-BFGS (grey, LB $\mathcal  {J}^{\bm  {u}}_f$) is the most effective DAL case in terms of both errors. At $n=200$, LB $\mathcal  {J}^{\bm  {u}}_f$ does not minimize $\mathcal  {J}^{\bm  {u}}_f$ to the same extent as SBI and QRM do in very few iterations. Figures 6{}{}{}\hbox {} and 7{}{}{}\hbox {} illustrate their corresponding trial vorticities, where it is clear that LB $\mathcal  {J}^{\bm  {u}}_f$ is under-resolved and does not approximate the target initial state. }}{10}{}}
+\newlabel{shearstudyq2}{{10}{10}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Derivation of Ill-Posed Nonlinear Adjoint Equation}{10}{}}
+\newlabel{secCongeneralized}{{V}{10}{}{}{}}
+\newlabel{energy}{{21}{10}{}{}{}}
+\newlabel{wadj}{{23}{10}{}{}{}}
+\newlabel{illp}{{24}{10}{}{}{}}
+\citation{Liu2008}
+\citation{Li2017}
+\citation{Bonavita2018}
+\citation{Ambrose2015}
+\citation{Ambrose2015}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Discussion and Conclusions}{11}{}}
+\newlabel{secCon}{{VI}{11}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Summary of Results}{11}{}}
+\newlabel{secConSummary}{{VI\,A}{11}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Future Work}{11}{}}
+\newlabel{secConfuture}{{VI\,B}{11}{}{}{}}
+\citation{Li2017,Liu2008}
+\citation{Li2017,Liu2008}
+\bibdata{main_revNotes,bib.bib}
+\bibcite{Lukyanenko2021}{{1}{2021}{{Lukyanenko\ \emph  {et~al.}}}{{Lukyanenko, Yeleskina, Prigorniy, Isaev, Borzunov,\ and\ Shishlenin}}}
+\bibcite{Subramanian2020}{{2}{2020}{{Subramanian\ \emph  {et~al.}}}{{Subramanian, Scheufele, Mehl,\ and\ Biros}}}
+\bibcite{Kabanikhin2020}{{3}{2020}{{Kabanikhin\ \emph  {et~al.}}}{{Kabanikhin, Kulikov,\ and\ Shishlenin}}}
+\bibcite{Liu2008}{{4}{2008}{{Liu\ and\ Gurnis}}{{}}}
+\bibcite{Li2017}{{5}{2017}{{Li\ \emph  {et~al.}}}{{Li, Gurnis,\ and\ Stadler}}}
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Appendix}{12}{}}
+\newlabel{secAppendix}{{VII}{12}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}KdVB Inverse Problem Objectives using SBI Initial Guess}{12}{}}
+\newlabel{secAppKdVBSBI}{{VII\,A}{12}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Navier--Stokes Inverse Problem Objectives using SBI Initial Guess}{12}{}}
+\newlabel{secAppNSBI}{{VII\,B}{12}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {}References}{12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {}References}{12}{}}
+\bibcite{Imanuvilov1997}{{6}{1997}{{Imanuvilov}}{{}}}
+\bibcite{Fan2009}{{7}{2009}{{Fan\ and\ Nakamura}}{{}}}
+\bibcite{Fan2010}{{8}{2010}{{Fan\ \emph  {et~al.}}}{{Fan, Cristo, Jiang,\ and\ Nakamura}}}
+\bibcite{Du2013}{{9}{2013}{{Du\ \emph  {et~al.}}}{{Du, Navon, Zhu, Fang,\ and\ Alekseev}}}
+\bibcite{Law2012}{{10}{2012}{{Law\ and\ Stuart}}{{}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Same is Figure 3{}{}{}\hbox {} using the SBI initial guess (shown in green). }}{13}{}}
+\newlabel{skdvevo}{{11}{13}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Same is Figure 5{}{}{}\hbox {} using initial guess $u^0(x, 0)$ generated via SBI.}}{13}{}}
+\newlabel{skdvb_optimize}{{12}{13}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Same as Figure 9{}{}{}\hbox {} using initial guess $\bm  {u}^0(\bm  {x}, 0)$ generated via SBI.}}{13}{}}
+\newlabel{shearstudys}{{13}{13}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Same as Figure 10{}{}{}\hbox {} using initial guess $\bm  {u}^0(\bm  {x}, 0)$ generated via SBI.}}{13}{}}
+\newlabel{shearstudys2}{{14}{13}{}{}{}}
+\bibcite{Fan2020}{{11}{2020}{{Fan\ \emph  {et~al.}}}{{Fan, Xu, Pathak,\ and\ Darve}}}
+\bibcite{FrerixThomas2021VDAw}{{12}{2021}{{Frerix\ \emph  {et~al.}}}{{Frerix, Kochkov, Smith, Cremers, Brenner,\ and\ Hoyer}}}
+\bibcite{Zhao2022}{{13}{2022}{{Zhao\ \emph  {et~al.}}}{{Zhao, Lindell,\ and\ Wetzstein}}}
+\bibcite{mowlavi_optimal_2023}{{14}{2023}{{Mowlavi\ and\ Nabi}}{{}}}
+\bibcite{Mannix2022discrete}{{15}{2022}{{Mannix\ \emph  {et~al.}}}{{Mannix, Skene, Auroux,\ and\ Marcotte}}}
+\bibcite{qrmsource}{{16}{}{{Latt{\`e}s\ \emph  {et~al.}}}{{Latt{\`e}s, Lions,\ and\ Bellman}}}
+\bibcite{Conrad2003}{{17}{2003}{{Conrad\ and\ Gurnis}}{{}}}
+\bibcite{Fang2012}{{18}{2012}{{Fang\ \emph  {et~al.}}}{{Fang, Bos, Liang, Bertoglio,\ and\ Shao}}}
+\bibcite{darde2016}{{19}{2016}{{Dardé}}{{}}}
+\bibcite{Nguyen2022}{{20}{2022}{{Nguyen\ and\ Klibanov}}{{}}}
+\bibcite{imanuvilov_2022}{{21}{2022}{{Imanuvilov\ \emph  {et~al.}}}{{Imanuvilov, Lorenzi,\ and\ Yamamoto}}}
+\bibcite{Steiner2012}{{22}{2012}{{Steiner\ and\ Reichl}}{{}}}
+\bibcite{10.1093/imanum/8.1.141}{{23}{1988}{{Barzilai\ and\ Borweigh}}{{}}}
+\bibcite{doi:10.1137/0916069}{{24}{1995}{{Byrd\ \emph  {et~al.}}}{{Byrd, Lu, Nocedal,\ and\ Zhu}}}
+\bibcite{Note2}{{25}{}{{Note2}}{{}}}
+\bibcite{Note3}{{26}{}{{Note3}}{{}}}
+\bibcite{Burns2020}{{27}{2020}{{Burns\ \emph  {et~al.}}}{{Burns, Vasil, Oishi, Lecoanet,\ and\ Brown}}}
+\bibcite{Nabi2022}{{28}{2022}{{Nabi\ \emph  {et~al.}}}{{Nabi, Grover,\ and\ Caulfield}}}
+\bibcite{Kerswell2014}{{29}{2014}{{Kerswell\ \emph  {et~al.}}}{{Kerswell, Pringle,\ and\ Willis}}}
+\bibcite{Bonavita2018}{{30}{2018}{{Bonavita\ \emph  {et~al.}}}{{Bonavita, Lean,\ and\ Holm}}}
+\bibcite{Ambrose2015}{{31}{2015}{{Ambrose\ \emph  {et~al.}}}{{Ambrose, Kondrla,\ and\ Valle}}}
+\bibstyle{apsrev4-2}
+\citation{REVTEX42Control}
+\citation{apsrev42Control}
+\newlabel{LastBibItem}{{31}{14}{}{}{}}
+\newlabel{LastPage}{{}{14}{}{}{}}
+\gdef \@abspage@last{14}
