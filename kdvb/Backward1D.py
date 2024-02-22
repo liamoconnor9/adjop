@@ -69,18 +69,18 @@ def build_problem(domain, xcoord, a, b, c, *args):
     # u - udiff = ubar
     if (np.isnan(abber)):
         problem.add_equation("dt(u_t) + a*dx(dx(u_t)) + b * dx(dx(dx(u_t))) = -c*u*dx(u_t) + udiff*dx(u - udiff)")
-        problem.add_equation("dt(obj_t) = -0.5*dx(u - udiff)*(udiff*udiff)")
+        problem.add_equation("dt(obj_t) = 0.0")
     elif (abber == 0):
         problem.add_equation("dt(u_t) + a*dx(dx(u_t)) + b * dx(dx(dx(u_t))) = -c*u*dx(u_t)")
         problem.add_equation("dt(obj_t) = 0.0")
     elif (abber < 0.0):
         problem.add_equation("dt(u_t) - a*(dx(dx(u_t - abber*dx(dx(u_t)) ))) + b * dx(dx(dx(u_t))) = -c*u*dx(u_t) - u_t*dx(u + u_t)")
-        problem.add_equation("dt(obj_t) = -0.5*abber*dx(u + u_t)*(u_t**2) + a*u_t*dx(dx(u_t))")
+        problem.add_equation("dt(obj_t) = 0.0")
     elif (abber == 1.0):
-        problem.add_equation("dt(u_t) + a*dx(dx(u_t)) + b * dx(dx(dx(u_t))) = -c*u*dx(u_t) - abber*u_t*dx(u + u_t)")
-        problem.add_equation("dt(obj_t) = -0.5*abber*dx(u + u_t)*(u_t**2) + a*u_t*dx(dx(u_t))")
+        problem.add_equation("dt(u_t) + a*dx(dx(u_t)) + b * dx(dx(dx(u_t))) = -c*dx(u*u_t) - abber*u_t*dx(u_t)")
+        problem.add_equation("dt(obj_t) = 0.0")
     else:
         logger.info('linear simple backward integration!!!!')
         problem.add_equation("dt(u_t) + a*dx(dx(u_t)) + b * dx(dx(dx(u_t))) = -c*u*dx(u_t) - u_t*dx(u)")
-        problem.add_equation("dt(obj_t) = -0.5*abber*dx(u + u_t)*(u_t**2) + a*u_t*dx(dx(u_t))")
+        problem.add_equation("dt(obj_t) = 0.0")
     return problem

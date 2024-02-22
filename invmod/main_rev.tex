@@ -116,7 +116,7 @@
 \begin{abstract}
   Even when the partial differential equation underlying a physical process can be evolved forward in time, the retrospective (backward in time) inverse problem often has its own challenges and applications.
   % The equations underlying physical processes can be evolved forward, and occasionally backward in time to extend the scope of our insight.
-  Direct Adjoint Looping (DAL) is the defacto approach for solving retrospective inverse problems, but it has not been applied to deterministic Navier--Stokes inverse problems in 2D or 3D.
+  Direct Adjoint Looping (DAL) is the defacto approach for solving retrospective inverse problems, but it has not been applied to deterministic \hly{retrospective} Navier--Stokes inverse problems in 2D or 3D.
   In this paper, we demonstrate that DAL is ill-suited for solving retrospective 2D Navier--Stokes inverse problems. 
   Alongside DAL, we study two other iterative methods: Simple Backward Integration (SBI) and the Quasi-Reversible Method (QRM).
   Our iterative SBI approach is novel while iterative QRM has previously been used.
@@ -131,7 +131,7 @@
 
 \section{Introduction}\label{secintro}
 
-Consider a retrospective inverse problem where the variable of interest $\overline{X}$ is constrained by a partial differential equation involving space $x$ and time $t$:
+Consider a retrospective inverse problem where the variable of interest $\overline{X}$ is constrained by a partial differential equation (PDE) involving space $x$ and time $t$:
 \begin{align}
   \mathcal{F}[\overline{X}(x, t)] = 0 \label{genintro}.
 \end{align}
@@ -171,8 +171,9 @@ More recently, researchers extended these analytical studies of Navier--Stokes i
 Following this, \cite{Law2012} studies data assimilation algorithms for non-deterministic Navier--Stokes inverse problems. 
 They demonstrate several advantages of using filters for numerical weather prediction.
 Yet more recently, \cite{Fan2020, FrerixThomas2021VDAw, Zhao2022, mowlavi_optimal_2023} used neural networks to solve analogous Navier--Stokes data-completion problems.
+\hly{In particular, \cite{mowlavi_optimal_2023} compares DAL with a physics-informed neural network approach while solving inverse problems governed by the viscous Burgers equation as well as 2D incompressible Navier--Stokes.}
 
-In this paper, we compare the performance of various iterative methods (such as DAL) by applying them to a retrospective Navier--Stokes inverse problem.
+\hspace{-0.38cm}\hly{In this paper, we will also compare the performance of several iterative methods (such as DAL) by applying them to a retrospective Navier--Stokes inverse problem.}
 Various Navier--Stokes inverse problems have been studied analytically and numerically using optimal control.
 However, we will demonstrate that conventional optimal control methods are ill-suited for this class of inverse problems, even when a numerically-consistent dataset is available.
 
@@ -190,16 +191,16 @@ Using this gradient, we adjust our trial initial condition by some amplitude $\g
 % For example, \cite{Li2017} used a preconditioned L-BFGS minimization routine to solve convective inverse problems with nonlinear viscosity.
 For example, \cite{Mannix2022discrete} used the conjugate-gradient method with a discrete adjoint formulation to optimize initial conditions subject to norm constraints.
 For the PNS inverse problem, \cite{Du2013} combined Principle Orthogonal Decomposition (POD) with four-dimensional variational assimilation (4DVAR), an optimal control technique analogous to DAL.
-% In both of these cases, researchers formulated the adjoint system in a different way (continuous, discrete, and POD) and in every case, they implemented a Quasi-Newton minimization routine (L-BFGS, conjugate-gradient).
-In both examples, researchers reduced the computational cost of each DAL iteration by reformulating the adjoint while simultaneously reducing the required number of DAL iterations by implementing Quasi-Newton minimization routines.
+% In both of these cases, researchers formulated the adjoint system in a different way (continuous, discrete, and POD) and in every case, they implemented a quasi-Newton minimization routine (L-BFGS, conjugate-gradient).
+In both examples, researchers reduced the computational cost of each DAL iteration by reformulating the adjoint while simultaneously reducing the required number of DAL iterations by implementing quasi-Newton minimization routines.
 For this investigation, we take a different approach.
-Instead of reformulating the adjoint or changing the way in which gradient information is used, we will later demonstrate that DAL's shortcomings in the context of Navier--Stokes inversion can be mitigated by appending the adjoint system with additional advective terms.}
+Instead of reformulating the adjoint or changing the way in which gradient information is used, we will demonstrate that DAL's shortcomings in the context of Navier--Stokes inversion can be mitigated by appending the adjoint system with additional advective terms.}
 
 The \colorbox{lime}{additional advective} terms not present in DAL are present in two existing nonlinear backward integration methods: Simple Backward Integration (SBI) and the Quasi-Reversible Method (QRM). 
 SBI and QRM are designed to invert the target final state by approximating the (ill-posed) integration of the original equations backward in time.
 SBI accomplishes this by reversing the sign of the problematic diffusion term, i.e.~$a\partial_x^2 X \to -a\partial^2_x X$.
 In contrast, QRM is a regularization framework which preserves the ill-posed diffusion term \cite{qrmsource}.
-With QRM, we append a small hyperdiffusive term to the otherwise ill-posed constraint equation, i.e.~$a\partial_x^2 X \to a(\partial^2_x + \varepsilon\partial^4_x) X$ where $0<\varepsilon\ll 1$. 
+With QRM, we append a small hyperdiffusion term to the otherwise ill-posed constraint equation, i.e.~$a\partial_x^2 X \to a(\partial^2_x + \varepsilon\partial^4_x) X$ where $0<\varepsilon\ll 1$. 
 
 We introduce these concepts as backward integration methods rather than iterative methods because their previous implementations were rarely iterated.
 SBI (which has never been iterated) was introduced by \cite{Conrad2003} to infer the history of Earth's convective mantle in the viscinity of the southern African superswell.
@@ -216,7 +217,7 @@ While an analysis involving Carleman estimates is outside the scope of this pape
 % This demonstrated shortcoming of SBI is due to the sign reversal of viscous/diffusive terms.
 % A DNS with viscosity cannot be reversed in the trivial sense due to some loses in precision at the floating point error. 
 % The quasi-Reversibility method (QRM) addresses this without modifying or discarding the ill-posed diffusive term.
-% This is made possible by introducing a small hyperdiffusive term which dampens the growth of floating point errors at small-scale modes \cite{qrmsource}.
+% This is made possible by introducing a small hyperdiffusion term which dampens the growth of floating point errors at small-scale modes \cite{qrmsource}.
 
 
 We compare DAL, SBI, and QRM by solving two retrospective inverse problems, respectively constrained by Korteweg--de Vries--Burgers (KdVB) and incompressible Navier--Stokes.
@@ -261,7 +262,7 @@ provides a concise context for demonstrating each method (DAL, SBI, QRM).
 Let $\overline{u}(x,t)$ denote to the target solution where $0\leq t\leq t_f$ in a 1D periodic domain $0 \leq x<L_x$.
 The retrospective inverse problem is solved by recovering the target initial state $\overline{u}(x,0)$ where the target final state $\overline{u}(x,t_f)$ is given.
 The general strategy has us construct trial solutions $u(x,t)$ satisfying eqn \ref{kdvb}, which we compute from trial initial states $u(x,0)$.
-We measure a trial state's proximity from the target using cost functionals $\Juo$ and $\Juf$, which are defined for an arbitrary variable $X$ in eqns \ref{costintro} and \ref{costoutro}.
+We measure a trial state's proximity from the target using the cost functionals $\Juo$ and $\Juf$, which are defined for an arbitrary variable $X$ in eqns \ref{costintro} and \ref{costoutro}.
 Both $\Juo$ and $\Juf$ vary with respect to the trial initial state $u(x,0)$.
 However, given that our knowledge of the target solution is limited to the final time $t_f$, it follows that we can only evaluate $\Juo$ if the target solution is known apriori.
 
@@ -278,8 +279,8 @@ We seek the trial solution's deviation $u'=u-\overline{u}$ at the initial time $
 Yellow: Direct Adjoint Looping (DAL) is a linear backward integration.
 For advective systems such as KdVB and Navier--Stokes, DAL advects the final deviation $u'(x,t_f)$ by the trial solution $u$. 
 Orange: Simple Backward Integration (SBI) is a hybrid method, which supplements the linear DAL system with two additional advective terms.
-Red: the Quasi-Reversible Method (QRM) aims to compute the deviation by introducing a small hyperdiffusive term with coefficient $\varepsilon$. 
-The QRM backward integration is ill-posed when $\varepsilon=0$ and numerically unstable as $\varepsilon\searrow 0$.}
+Red: the Quasi-Reversible Method (QRM) aims to compute the deviation by introducing a small hyperdiffusion term with coefficient $\varepsilon$. 
+The QRM backward integration is ill-posed when $\varepsilon=0$ and numerically unstable as $\varepsilon\to 0$.}
   \label{adj_diag}
   % \includegraphics[width=4.5in]{../1drev/LI1000/targetsim_elapse.pdf}
 \end{figure}
@@ -313,9 +314,9 @@ In practice this leads to redundant computations (due to memory constraints), of
 
 Once $\Juf$'s gradient is known, we use gradient descent with the popular Barzilai--Borwein method \cite{10.1093/imanum/8.1.141} to select step sizes. 
 In addition to gradient descent, we also minimize $\Juf$ using the second-order sparse L-BFGS algorithm \cite{doi:10.1137/0916069} which utilizes the gradient's history over several iterations.
-\hly{We select these two optimization routines for comparison after observing that they converge faster than alternatives \footnote[2]{In addition to the results shown in section \ref{seckdvb}, we perform numerical experiments on the KdVB inverse problem using conjugate-gradient and line search routines (provided by scipy version 1.12.0).
+\hly{We select these two optimization routines for comparison after observing that they converge faster than alternatives. \footnote[2]{In addition to the results shown in section \ref{seckdvb}, we perform numerical experiments on the KdVB inverse problem using conjugate-gradient and line search routines (provided by scipy version 1.12.0).
 In both cases we use the default parameters.
-For the line search, we use the negative gradient for the descent direction.}.}
+For the line search, we use the negative gradient for the descent direction.}}
 
 % Broyden–Fletcher–Goldfarb–Shanno algorithm
 
@@ -363,7 +364,7 @@ Notice how the ill-posed term remains, but the equation becomes well-posed becau
 
 The QRM loop is carried out using the same procedure as SBI.
 We initialize eqn \ref{qrmbi} with $\tmu(x, t_f) = -u'(x,t_f)$ and update the trial state $u_{n+1}(x,0) = u_n(x,0) + \tmu_n(x,0)$.
-In Figure \ref{adj_diag}, we illustrate how QRM (red) recovers the unknown deviation precisely as $\varepsilon\searrow 0$.
+In Figure \ref{adj_diag}, we illustrate how QRM (red) recovers the unknown deviation precisely as $\varepsilon\to 0$.
 However this limit is numerically unstable.
 % Once the relaxation parameter $\varepsilon$ is set to a positive finite value, it is clear that hyperdiffusion will eventually overcome the ill-posed diffusion as we consider smaller and smaller scale modes.
 
@@ -405,12 +406,12 @@ As the wave's peak regains its former amplitude, its speed of propagation increa
 % \subsection{Methods}
 % \subsubsection{Overview}
 The target and trial solutions along with each backward integration are carried out using the \texttt{Dedalus} open-source pseudospectral python framework \cite{Burns2020}. 
-We represent $u,\mu,$ and $\tmu$ as vectors of 128 real Fourier modes. 
+We represent $u,\;\mu,$ and $\tmu$ as vectors of 128 real Fourier modes. 
 While computing $u(x, t)$, we store the solution vector at each timestep.
 Linear (diffusive and dispersive) terms are treated implicitly whereas the nonlinear advective term is evaluated explicitly by multiplying $u$'s grid data on a 3/2 dealiased grid. 
 The same holds when we perform backward integrations, where terms such as $\mu\partial_x u$ must be treated explicitly to avoid dense matrix operations at every timestep.
 \hly{Compared to DAL, the SBI and QRM backward integration equations contain more of these terms. 
-Consequently, each SBI and QRM iteration requires approximately $1\%$ more computation time.}
+Consequently, each SBI and QRM iteration requires approximately $30\%$ more computation time.}
 For every solve we use a 2nd-order Runge--Kutta scheme with a fixed timestep $\Delta t=0.01$.
 \hly{We verify the adjoint solver's accuracy by comparing its output to a gradient obtained via finite-difference.
 Our code for this paper is available at \url{https://github.com/liamoconnor9/adjop}}
@@ -452,7 +453,7 @@ Similarly, $u_{200}(x,0)$ is centered near $x=3\pi/2$ with approximately triple 
 Their respective final states ($u_{10}(x,3\pi)$, $u_{50}(x,3\pi)$, and $u_{200}(x,3\pi)$) all contain peaks which approximately align with the target's ($\overline{u}(x,3\pi)$).
 
 Rather than following the direction of steepest descent, L-BFGS anticipates changes in the gradient by constructing a sparse Hessian representation.
-Although this Quasi-Newton method recovers the target initial state better than gradient descent at $n=200$, L-BFGS still does not yield a quality approximation of $\overline{u}(x,0)$.
+Although this quasi-Newton method recovers the target initial state better than gradient descent at $n=200$, L-BFGS still does not yield a quality approximation of $\overline{u}(x,0)$.
 This case introduces additional wave features in $u_{10}(x,0)$, $u_{50}(x,0)$, and $u_{200}(x,0)$ which do not appear in the target.
 
 To locate the target state, we introduce additional advective terms in the backward integration.
@@ -476,7 +477,7 @@ This is illustrated by $u_{10}(x,0)$ and $u_{50}(x,0)$ in the bottom left panel 
 Their peaks shift leftward, approaching the target with each iteration.
 When the trial final state intercepts the target, the deviation shrinks and SBI's backward diffusion has less influence on the direction of each subsequent update.
 QRM refines each trial state by advecting the final deviation while simultaneously inverting diffusion.
-The hyperdiffusive term slows backward advection to a lesser extent than SBI, yielding smaller rightward misalignments. 
+The hyperdiffusion term slows backward advection to a lesser extent than SBI, yielding smaller rightward misalignments. 
 These updates approximate the initial deviation as it shrinks with each iteration, such that iterative QRM behaves like a one-shot method (e.g.~\cite{Nabi2022}).
 
 \hspace{-0.45cm}\hly{For QRM and SBI, we plot the deviation $u'(x,0) = u_{200}(x,0) - \overline{u}(x,0)$ at iteration $n=200$ in Figure \ref{kdvb_diff}.
@@ -577,7 +578,7 @@ Using DAL, we minimize two objective functionals with associated compatibility c
   \JUf &\equiv \frac{1}{2}\left\langle|| \vec{u'}(\vec{x}, t_f)||^2\right\rangle   \rightarrow  \vec{\mu}(\vec{x}, t_f)=-\vec{u'}(\vec{x}, t_f); \\
   \Jwf &\equiv \frac{1}{2}\left\langle\left( \omega'(\vec{x}, t_f)\right)^2\right\rangle \rightarrow  \vec{\mu}(\vec{x}, t_f)=\grad^{\perp}\omega'(\vec{x}, t_f) \label{Jw}.
 \end{align}
-The skew-gradient $\grad^{\perp}\equiv (-\partial_y, \partial_x)$ and the vorticity $\omega \equiv \grad^{\perp}\cdot\vec{u}$. 
+The skew-gradient $\grad^{\perp}\equiv (-\partial_y, \; \partial_x)$ and the vorticity $\omega \equiv \grad^{\perp}\cdot\vec{u}$. 
 As with KdVB, a prime denotes the deviation of a trial variable from its target, e.g.~$\omega'\equiv\omega-\overline{\omega}$ and so on.
 $\JUf$ quantifies the trial states' proximity to the target at the final time $t_f$ in terms of velocity whereas $\Jwf$ does so using vorticity.
 We implement the gradient descent (GD) and L-BFGS optimization routines to minimize these two cost functionals.
@@ -597,7 +598,7 @@ Its corresponding approximation for eqn \ref{nspert} is given by}
   0 &= \grad\cdot\vec{\tmu} \\
   \hspace{-2cm}\vec{0} &= \partial_t \vec{\tmu} + \vec{u}\cdot\grad \vec{\tmu} + \vec{\tmu}\cdot\grad \vec{u} + \vec{\tmu}\cdot\grad\vec{\tmu} +\grad \tilde{\Pi} + \nu\grad^2 \vec{\tmu}\nonumber
   % &\nu\grad^2 \vec{\tmu} \to -\nu\grad^2 \vec{\tmu} 
-\intertext{For QRM, we introduce a small hyperdiffusive term, approximating eqn \ref{nspert} as}
+\intertext{For QRM, we introduce a small hyperdiffusion term, approximating eqn \ref{nspert} as}
   0 &= \grad\cdot\vec{\tmu} \\
   \hspace{-2cm}\vec{0} &= \partial_t \vec{\tmu} + \vec{u}\cdot\grad \vec{\tmu} + \vec{\tmu}\cdot\grad \vec{u} + \vec{\tmu}\cdot\grad\vec{\tmu} +\grad \tilde{\Pi} \nonumber \\
   &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad - \nu(\grad^2 + \varepsilon\grad^4) \vec{\tmu}.\nonumber
@@ -728,12 +729,12 @@ In terms of $\JUf$, SBI (light blue solid) and QRM (dark blue dotted) both outpe
 
 Figure \ref{shearstudyq2} extends Figure \ref{shearstudyq} to iteration $n=200$.
 Both DAL gradient descent algorithms (GD $\JUf$ and GD $\Jwf$) stall after $n=20$, whereas LB $\JUf$ continues to minimize the final error $\JUf$.
-We observe sharp spikes in $\JUf$ with LB $\JUf$ as the L-BFGS algorithm refines the trial solution.
+% We observe sharp spikes in $\JUf$ with LB $\JUf$ as the L-BFGS algorithm refines the trial solution.
 The relative success of LB $\JUf$ indicates that the gradient of $\JUf$ has large curvature.
 SBI and QRM continue to outperform all DAL runs, with QRM decreasing $\JUo$ slightly more.
 With QRM, the errors decrease nonmonotonically whereas SBI exhibits a smooth decline.
 
-Whereas previous work uses SBI and QRM to perform a single loop, we demonstrate in Figures \ref{shearstudyq} and \ref{shearstudyq2} that these methods can be iterated.
+Whereas previous work used SBI and QRM to perform a single loop, we demonstrate in Figures \ref{shearstudyq} and \ref{shearstudyq2} that these methods can be iterated.
 SBI and QRM both decrease the errors by more than an order of magnitude in a single iteration.
 For $n>150$ in Figure \ref{shearstudyq2}, SBI and QRM continue to gradually minimize $\JUf$.
 This prolonged minimization of $\JUf$ using iterative SBI is a surprising result of our study.
@@ -794,7 +795,7 @@ If eqn \ref{illp} could be solved, we would obtain the exact deviation in our tr
 For example, the non-diffusive Korteweg--de Vries equation and the inviscid Euler equation admit well-posed nonlinear adjoints as these equations are time-reversible.
 However when $a>0$ (diffusive forward problem), eqn \ref{illp} cannot be solved backwards using conventional numerical solvers.
 The ill-posed backward integration problem motivates the SBI and QRM modifications.
-As $\varepsilon\searrow 0$, QRM backward integration approaches the ill-posed nonlinear adjoint which minimizes $\Juo$.
+As $\varepsilon\to 0$, QRM backward integration approaches the ill-posed nonlinear adjoint which minimizes $\Juo$.
 \hly{From this perspective, QRM is a regularized form of DAL.
 SBI backward integration combines the linear adjoint which minimizes $\Juf$ with the additional terms appearing in the ill-posed nonlinear adjoint.}
 
@@ -828,7 +829,7 @@ This modified constraint equation is well-posed because we reverse the sign of t
 % SBI is identical to DAL with the inclusion of two additional terms, one of which is nonlinear.
 
 Iterative QRM has previously been implented.
-With this backward integration, we preserve the ill-posed diffusion term by introducing a small hyperdiffusive term to relax the numerical instability.
+With this backward integration, we preserve the ill-posed diffusion term by introducing a small hyperdiffusion term to relax the numerical instability.
 We must also tune this hyperdiffusion term's coefficient $\varepsilon$ according to the problem's dynamics and numerical resolution.
 % Accordingly, QRM can  approximate the initial deviation more accurately than SBI. 
 
@@ -887,7 +888,7 @@ Another relevant study is \cite{Ambrose2015}, which computes time-periodic solut
 Using DAL, they minimize a cost functional which resembles $\Juf$.
 Although they are not afforded a target final state, we can interpret their adjoint loop as a dynamic inversion where the target state changes with each iteration.
 Conceptually, any properly-constrained optimal control problem has a corresponding retrospective inverse problem.
-The compatibility condition may differ (e.g.~\cite{Ambrose2015} initializes their adjoint with the discrepancy between their trial initial and final states), but in general the adjoint evolution equations remain the same.
+The compatibility condition may differ (e.g.~\cite{Ambrose2015} initializes their adjoint with the deviation between their trial initial and final states), but in general the adjoint evolution equations remain the same.
 Given that our SBI and QRM loops tend toward the mutual extremum of $\Juo$ and $\Juf$, it is reasonable to suggest that these methods might also have attracting extrema when seeking periodic solutions.
 Efficient algorithms for computing time-periodic solutions would have direct applications in studying cyclic dynamos and anticipating nonlinear resonances in engineering systems such as turbines.
 
@@ -925,10 +926,10 @@ Efficient algorithms for computing time-periodic solutions would have direct app
 % % However, this can only be performed exactly by performing an idealized backward integration which solves an ill-posed perturbation equation.
 %  circumvent this issue by modifying the problem term.
 
-% QRM (described in section II) deals with the ill-posed problem term by introducing a higher-order hyperdiffusive term whose coefficient $\varepsilon$ is small.
+% QRM (described in section II) deals with the ill-posed problem term by introducing a higher-order hyperdiffusion term whose coefficient $\varepsilon$ is small.
 % Its backward integration is designed to capture the advective-diffusive evolution of the forward problem in a way that is numerically stable.
 % Backwards evolution of the ill-posed term would otherwise cause high-order Fourier modes to explode, due to loss of precision in the solve loop.
-% The hyperdiffusive terms we employed with QRM relax these unstable modes allowing us to perform something akin to the idealized backward integration.
+% The hyperdiffusion terms we employed with QRM relax these unstable modes allowing us to perform something akin to the idealized backward integration.
 % In theory, this method will always work to some extent, provided we are solving over a sufficiently large number of modes.
 % With enough resolution, we can make $\varepsilon \ll 1$ such that the dynamics of the forward and backward integrations are nearly identical.
 % Thus QRM might not be appropriate for the inversion large-scale 3D DNS.

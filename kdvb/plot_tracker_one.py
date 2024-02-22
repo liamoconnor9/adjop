@@ -54,7 +54,7 @@ matplotlib.rcParams.update({'xtick.labelsize':  fontsize})
 matplotlib.rcParams.update({'ytick.labelsize':  fontsize})
 
 
-filenames = ["C0e1", "C0", "C1", "Cnp004"]
+filenames = ["C0e1", "C0", "C0ls", "C0cg"]
 fig, axs = plt.subplots(2, 2, sharey='row')
 axs = axs.flat
 
@@ -194,6 +194,14 @@ for indexy, filename in enumerate(filenames):
         # approx_inds = [0, 1, 9, 24, 99]
         axs[indexy].text(pos[0], pos[1], r'GD $\mathcal{J}^u_f$', fontsize=fs)
         axs[indexy].text(pos[0], pos[1]- shift, r'$u_n(x,0)$', fontsize=fs)
+    elif (suffix == "C0ls"):
+        # approx_inds = [0, 1, 9, 24, 99]
+        axs[indexy].text(pos[0], pos[1], r'LS $\mathcal{J}^u_f$', fontsize=fs)
+        axs[indexy].text(pos[0], pos[1]- shift, r'$u_n(x,0)$', fontsize=fs)
+    elif (suffix == "C0cg"):
+        # approx_inds = [0, 1, 9, 24, 99]
+        axs[indexy].text(pos[0], pos[1], r'CG $\mathcal{J}^u_f$', fontsize=fs)
+        axs[indexy].text(pos[0], pos[1]- shift, r'$u_n(x,0)$', fontsize=fs)
     elif (suffix == "Cnp004"):
         # approx_inds = [0, 1, 9]
         axs[indexy].text(pos[0], pos[1], r'$\varepsilon=0.01$', fontsize=fs)
@@ -203,6 +211,7 @@ for indexy, filename in enumerate(filenames):
         raise
 
     lines=[]
+    # print(len(data['x']))
     for ind in approx_inds:
         u.change_scales(1.5)
         u['g'] = data['x'][ind]

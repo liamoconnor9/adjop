@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.5.30)  20 FEB 2024 22:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.5.30)  21 FEB 2024 18:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -266,78 +266,118 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 \openout3 = `main_revNotes.bib'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 130.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 119.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 130.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 119.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
+Underfull \hbox (badness 1052) in paragraph at lines 117--127
+ \OT1/cmr/m/n/9 for-ward in time, the ret-ro-spec-tive (back-ward in time) in-verse prob-lem of-ten has its own 
+ []
+
+
+Underfull \hbox (badness 3746) in paragraph at lines 117--127
+ \OT1/cmr/m/n/9 chal-lenges and ap-pli-ca-tions. Di-rect Ad-joint Loop-ing (DAL) is the de-facto ap-proach 
+ []
+
+
+Underfull \hbox (badness 1831) in paragraph at lines 117--127
+ \OT1/cmr/m/n/9 for solv-ing ret-ro-spec-tive in-verse prob-lems, but it has not been ap-plied to de-ter-min-is-tic 
+ []
+
+
+Overfull \hbox (116.0pt too wide) in paragraph at lines 117--127
+ [][][][][][] 
+ []
+
+
 Underfull \hbox (badness 1655) in paragraph at lines 141--149
 []\OT1/cmr/m/n/10 Despite po-ten-tial dif-fi-cul-ties, ret-ro-spec-tive in-verse
  []
 
+
+Underfull \hbox (badness 1163) in paragraph at lines 168--175
+\OT1/cmr/m/n/10 prob-lem gov-erned by the parab-o-lized Navier--Stokes
+ []
+
+
+Underfull \hbox (badness 5331) in paragraph at lines 168--175
+\OT1/cmr/m/n/10 anal-o-gous Navier--Stokes data-completion prob-lems.
+ []
+
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 168--175
+[][][][][][] 
+ []
+
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (3.19635pt too wide) in paragraph at lines 189--197
+Overfull \hbox (5.18782pt too wide) in paragraph at lines 176--179
+[] [][][][][][]
+ []
+
+
+Overfull \hbox (3.19635pt too wide) in paragraph at lines 190--198
 [] [][][][][][] 
  []
 
-
-Underfull \hbox (badness 2181) in paragraph at lines 259--267
+[2]
+Underfull \hbox (badness 2181) in paragraph at lines 260--268
 \OT1/cmr/m/n/10 provides a con-cise con-text for demon-strat-ing each
  []
 
-[2]
+
 
 pdfTeX warning: pdflatex (file ./loop.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 <loop.pdf, id=22, 1286.40598pt x 1416.49196pt>
 File: loop.pdf Graphic file (type pdf)
 <use loop.pdf>
-Package pdftex.def Info: loop.pdf  used on input line 271.
+Package pdftex.def Info: loop.pdf  used on input line 272.
 (pdftex.def)             Requested size: 252.94499pt x 278.5167pt.
 
-Overfull \hbox (6.94499pt too wide) in paragraph at lines 271--272
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 272--273
  [][] 
  []
 
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 304--313
+Overfull \hbox (6.0pt too wide) in paragraph at lines 305--314
 [][][][][][] 
  []
 
 
-Underfull \hbox (badness 2418) in paragraph at lines 314--319
+Underfull \hbox (badness 2418) in paragraph at lines 315--320
 []\OT1/cmr/m/n/10 Once $\OMS/cmsy/m/n/10 J[]$\OT1/cmr/m/n/10 's gra-di-ent is known, we use gra-di-ent
  []
 
 
-Underfull \hbox (badness 2042) in paragraph at lines 314--319
+Underfull \hbox (badness 2042) in paragraph at lines 315--320
 \OT1/cmr/m/n/10 de-scent with the pop-u-lar Barzilai--Borwein method
  []
 
 
-Underfull \hbox (badness 1342) in paragraph at lines 314--319
+Underfull \hbox (badness 1342) in paragraph at lines 315--320
 \OT1/cmr/m/n/10 [[]] to se-lect step sizes. In ad-di-tion to gra-di-ent
  []
 
 
-Underfull \hbox (badness 2980) in paragraph at lines 314--319
+Underfull \hbox (badness 2980) in paragraph at lines 315--320
 \OT1/cmr/m/n/10 de-scent, we also min-i-mize $\OMS/cmsy/m/n/10 J[]$ \OT1/cmr/m/n/10 us-ing the second-
  []
 
 
-Underfull \hbox (badness 7081) in paragraph at lines 314--319
+Underfull \hbox (badness 7081) in paragraph at lines 315--320
 \OT1/cmr/m/n/10 order sparse L-BFGS al-go-rithm [[]] which uti-
  []
 
 
-Underfull \hbox (badness 2486) in paragraph at lines 314--319
+Underfull \hbox (badness 2486) in paragraph at lines 315--320
 \OT1/cmr/m/n/10 lizes the gra-di-ent's his-tory over sev-eral it-er-a-tions.
  []
 
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 314--319
+Overfull \hbox (6.0pt too wide) in paragraph at lines 315--320
 [][][][][][] 
  []
 
@@ -345,55 +385,55 @@ Overfull \hbox (6.0pt too wide) in paragraph at lines 314--319
 <all.pdf, id=52, 284.56313pt x 135.50626pt>
 File: all.pdf Graphic file (type pdf)
 <use all.pdf>
-Package pdftex.def Info: all.pdf  used on input line 387.
+Package pdftex.def Info: all.pdf  used on input line 388.
 (pdftex.def)             Requested size: 361.34999pt x 172.08893pt.
 
-Underfull \hbox (badness 1675) in paragraph at lines 407--417
+Underfull \hbox (badness 1675) in paragraph at lines 408--418
 \OT1/cmr/m/n/10 non-lin-ear ad-vec-tive term is eval-u-ated ex-plic-itly by
  []
 
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 407--417
+Overfull \hbox (6.0pt too wide) in paragraph at lines 408--418
 [][][][][][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 407--417
+Underfull \hbox (badness 10000) in paragraph at lines 408--418
 \OT1/cmr/m/n/10 For ev-ery solve we use a 2nd-order Runge--
  []
 
 
-Underfull \hbox (badness 1776) in paragraph at lines 407--417
+Underfull \hbox (badness 1776) in paragraph at lines 408--418
 \OT1/cmr/m/n/10 Kutta scheme with a fixed timestep $^^A\OML/cmm/m/it/10 t \OT1/cmr/m/n/10 = 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 01$.
  []
 
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 407--417
+Overfull \hbox (6.0pt too wide) in paragraph at lines 408--418
 [][][][][][] 
  []
 
 <legend_kdvb.pdf, id=53, 507.70976pt x 19.4326pt>
 File: legend_kdvb.pdf Graphic file (type pdf)
 <use legend_kdvb.pdf>
-Package pdftex.def Info: legend_kdvb.pdf  used on input line 427.
+Package pdftex.def Info: legend_kdvb.pdf  used on input line 428.
 (pdftex.def)             Requested size: 361.34999pt x 13.83102pt.
 <PLTD/all.pdf, id=54, 513.11702pt x 317.12373pt>
 File: PLTD/all.pdf Graphic file (type pdf)
 <use PLTD/all.pdf>
-Package pdftex.def Info: PLTD/all.pdf  used on input line 428.
+Package pdftex.def Info: PLTD/all.pdf  used on input line 429.
 (pdftex.def)             Requested size: 361.34999pt x 223.33514pt.
 [4]
-Overfull \hbox (3.19635pt too wide) in paragraph at lines 482--488
+Overfull \hbox (3.19635pt too wide) in paragraph at lines 483--489
 [] [][][][][][] 
  []
 
 <diff_plot/approx.pdf, id=59, 289.08pt x 178.66127pt>
 File: diff_plot/approx.pdf Graphic file (type pdf)
 <use diff_plot/approx.pdf>
-Package pdftex.def Info: diff_plot/approx.pdf  used on input line 493.
+Package pdftex.def Info: diff_plot/approx.pdf  used on input line 494.
 (pdftex.def)             Requested size: 252.94499pt x 156.3282pt.
 
-Overfull \hbox (6.94499pt too wide) in paragraph at lines 493--497
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 494--498
  [][] 
  []
 
@@ -401,172 +441,172 @@ Overfull \hbox (6.94499pt too wide) in paragraph at lines 493--497
 <PLTC/all.pdf, id=112, 289.08pt x 158.99399pt>
 File: PLTC/all.pdf Graphic file (type pdf)
 <use PLTC/all.pdf>
-Package pdftex.def Info: PLTC/all.pdf  used on input line 507.
+Package pdftex.def Info: PLTC/all.pdf  used on input line 508.
 (pdftex.def)             Requested size: 252.94499pt x 139.11938pt.
 
-Overfull \hbox (6.94499pt too wide) in paragraph at lines 507--511
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 508--512
  [][] 
  []
 
 [6 <./legend_kdvb.pdf> <./PLTD/all.pdf> <./diff_plot/approx.pdf>]
 
-LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix] on input line 536.
+LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix] on input line 537.
 
 
-Overfull \hbox (5.38498pt too wide) detected at line 548
+Overfull \hbox (5.38498pt too wide) detected at line 549
 []
  []
 
 
-Underfull \hbox (badness 2635) in paragraph at lines 579--585
+Underfull \hbox (badness 2635) in paragraph at lines 580--586
 \OT1/cmr/m/n/10 the de-vi-a-tion of a trial vari-able from its tar-get,
  []
 
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 579--585
+Overfull \hbox (6.0pt too wide) in paragraph at lines 580--586
 [][][][][][] 
  []
 
 [7 <./PLTC/all.pdf>]
-Overfull \hbox (6.0pt too wide) in paragraph at lines 604--606
+Overfull \hbox (6.0pt too wide) in paragraph at lines 605--607
 [][][][][][] 
  []
 
 <Truesmolwrite000200.png, id=283, 2722.17pt x 2547.5175pt>
 File: Truesmolwrite000200.png Graphic file (type png)
 <use Truesmolwrite000200.png>
-Package pdftex.def Info: Truesmolwrite000200.png  used on input line 611.
+Package pdftex.def Info: Truesmolwrite000200.png  used on input line 612.
 (pdftex.def)             Requested size: 252.94499pt x 236.69122pt.
 
-Overfull \hbox (6.94499pt too wide) in paragraph at lines 611--612
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 612--613
  [][] 
  []
 
 <Falsesmolwrite000200.png, id=284, 2722.17pt x 2547.5175pt>
 File: Falsesmolwrite000200.png Graphic file (type png)
 <use Falsesmolwrite000200.png>
-Package pdftex.def Info: Falsesmolwrite000200.png  used on input line 656.
+Package pdftex.def Info: Falsesmolwrite000200.png  used on input line 657.
 (pdftex.def)             Requested size: 252.94499pt x 236.69122pt.
 
-Overfull \hbox (6.94499pt too wide) in paragraph at lines 656--657
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 657--658
  [][] 
  []
 
 <qdev.pdf, id=285, 289.08pt x 178.66127pt>
 File: qdev.pdf Graphic file (type pdf)
 <use qdev.pdf>
-Package pdftex.def Info: qdev.pdf  used on input line 682.
+Package pdftex.def Info: qdev.pdf  used on input line 683.
 (pdftex.def)             Requested size: 252.94499pt x 156.3282pt.
 
-Overfull \hbox (6.94499pt too wide) in paragraph at lines 682--683
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 683--684
  [][] 
  []
 
 [8 <./Truesmolwrite000200.png (PNG copy)>]
 
-LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix] on input line 697.
+LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix] on input line 698.
 
 <PLT20DQ/both.pdf, id=291, 289.08pt x 158.99399pt>
 File: PLT20DQ/both.pdf Graphic file (type pdf)
 <use PLT20DQ/both.pdf>
-Package pdftex.def Info: PLT20DQ/both.pdf  used on input line 700.
+Package pdftex.def Info: PLT20DQ/both.pdf  used on input line 701.
 (pdftex.def)             Requested size: 252.94499pt x 139.11938pt.
 
-Overfull \hbox (6.94499pt too wide) in paragraph at lines 700--701
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 701--702
  [][] 
  []
 
 <PLT200DQ/both.pdf, id=292, 289.08pt x 158.99399pt>
 File: PLT200DQ/both.pdf Graphic file (type pdf)
 <use PLT200DQ/both.pdf>
-Package pdftex.def Info: PLT200DQ/both.pdf  used on input line 717.
+Package pdftex.def Info: PLT200DQ/both.pdf  used on input line 718.
 (pdftex.def)             Requested size: 252.94499pt x 139.11938pt.
 
-Overfull \hbox (6.94499pt too wide) in paragraph at lines 717--718
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 718--719
  [][] 
  []
 
 [9 <./Falsesmolwrite000200.png (PNG copy)> <./qdev.pdf> <./PLT20DQ/both.pdf>]
 
-LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix] on input line 747.
+LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix] on input line 756.
 
 
-Underfull \hbox (badness 1946) in paragraph at lines 789--800
+Underfull \hbox (badness 1946) in paragraph at lines 790--801
 \OT1/cmr/m/n/10 24[] can-not be solved back-wards us-ing con-ven-tional
  []
 
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 789--800
+Overfull \hbox (6.0pt too wide) in paragraph at lines 790--801
 [][][][][][] 
  []
 
 [10 <./PLT200DQ/both.pdf>]
-Underfull \hbox (badness 1960) in paragraph at lines 835--845
+Underfull \hbox (badness 1960) in paragraph at lines 836--846
 []\OT1/cmr/m/n/10 Our first in-verse prob-lem is con-strained by the
  []
 
 
-Underfull \hbox (badness 2393) in paragraph at lines 876--884
+Underfull \hbox (badness 2393) in paragraph at lines 877--885
 []\OT1/cmr/m/n/10 Optimal con-trol via DAL is the most com-mon
  []
 
 
-Underfull \hbox (badness 1062) in paragraph at lines 876--884
+Underfull \hbox (badness 1062) in paragraph at lines 877--885
 \OT1/cmr/m/n/10 ap-proach for ret-ro-spec-tive in-verse prob-lems. How-
  []
 
 
-Underfull \hbox (badness 1102) in paragraph at lines 876--884
+Underfull \hbox (badness 1102) in paragraph at lines 877--885
 \OT1/cmr/m/n/10 ever, SBI and QRM are more ef-fec-tive than DAL
  []
 
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 876--884
+Overfull \hbox (6.0pt too wide) in paragraph at lines 877--885
 [][][][][][]
  []
 
 
-Underfull \hbox (badness 1430) in paragraph at lines 876--884
+Underfull \hbox (badness 1430) in paragraph at lines 877--885
 \OT1/cmr/m/n/10 are lim-ited by our abil-ity to in-cor-po-rate real-time
  []
 
 [11]
 File: legend_kdvb.pdf Graphic file (type pdf)
 <use legend_kdvb.pdf>
-Package pdftex.def Info: legend_kdvb.pdf  used on input line 958.
+Package pdftex.def Info: legend_kdvb.pdf  used on input line 959.
 (pdftex.def)             Requested size: 361.34999pt x 13.83102pt.
 <PLTD/sall.pdf, id=435, 513.11702pt x 317.12373pt>
 File: PLTD/sall.pdf Graphic file (type pdf)
 <use PLTD/sall.pdf>
-Package pdftex.def Info: PLTD/sall.pdf  used on input line 959.
+Package pdftex.def Info: PLTD/sall.pdf  used on input line 960.
 (pdftex.def)             Requested size: 361.34999pt x 223.33514pt.
 <sapprox/PLTC/all.pdf, id=436, 289.08pt x 158.99399pt>
 File: sapprox/PLTC/all.pdf Graphic file (type pdf)
 <use sapprox/PLTC/all.pdf>
-Package pdftex.def Info: sapprox/PLTC/all.pdf  used on input line 991.
+Package pdftex.def Info: sapprox/PLTC/all.pdf  used on input line 992.
 (pdftex.def)             Requested size: 252.94499pt x 139.11938pt.
 
-Overfull \hbox (6.94499pt too wide) in paragraph at lines 991--994
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 992--995
  [][] 
  []
 
 <PLT20DS/both.pdf, id=437, 289.08pt x 158.99399pt>
 File: PLT20DS/both.pdf Graphic file (type pdf)
 <use PLT20DS/both.pdf>
-Package pdftex.def Info: PLT20DS/both.pdf  used on input line 1012.
+Package pdftex.def Info: PLT20DS/both.pdf  used on input line 1013.
 (pdftex.def)             Requested size: 252.94499pt x 139.11938pt.
 
-Overfull \hbox (6.94499pt too wide) in paragraph at lines 1012--1013
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 1013--1014
  [][] 
  []
 
 <PLT200DS/both.pdf, id=438, 289.08pt x 158.99399pt>
 File: PLT200DS/both.pdf Graphic file (type pdf)
 <use PLT200DS/both.pdf>
-Package pdftex.def Info: PLT200DS/both.pdf  used on input line 1019.
+Package pdftex.def Info: PLT200DS/both.pdf  used on input line 1020.
 (pdftex.def)             Requested size: 252.94499pt x 139.11938pt.
 
-Overfull \hbox (6.94499pt too wide) in paragraph at lines 1019--1020
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 1020--1021
  [][] 
  []
 
@@ -595,7 +635,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  69i,13n,76p,1265b,397s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on main_rev.pdf (14 pages, 2272048 bytes).
+Output written on main_rev.pdf (14 pages, 2271759 bytes).
 PDF statistics:
  735 PDF objects out of 1000 (max. 8388607)
  355 compressed objects within 4 object streams

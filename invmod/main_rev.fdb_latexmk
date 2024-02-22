@@ -1,15 +1,15 @@
 # Fdb version 3
-["bibtex main_rev"] 1708490613 "main_rev.aux" "main_rev.bbl" "main_rev" 1708490614
+["bibtex main_rev"] 1708558783 "main_rev.aux" "main_rev.bbl" "main_rev" 1708561359
   "/usr/share/texlive/texmf-dist/bibtex/bst/revtex/apsrev4-2.bst" 1601932770 69609 e9dea59f0e753ccda3ddc8f5806d846d ""
   "bib.bib" 1708456646 67448 143fae3d57fe1b486b9423df53647b6a ""
-  "main_rev.aux" 1708490613 16687 2dced52ba055cb2b9ed2899d35e5c40d "pdflatex"
-  "main_revNotes.bib" 1708490613 841 e183e573f22fafe975ba4a9b511bb04d "pdflatex"
+  "main_rev.aux" 1708561358 16714 970f1d27c48bcd30c75a93bd7b8b555f "pdflatex"
+  "main_revNotes.bib" 1708561358 841 e183e573f22fafe975ba4a9b511bb04d "pdflatex"
   (generated)
   "main_rev.bbl"
   "main_rev.blg"
-["pdflatex"] 1708490613 "/home/liamo/invmod/main_rev.tex" "main_rev.pdf" "main_rev" 1708490614
+["pdflatex"] 1708561358 "/home/liamo/invmod/main_rev.tex" "main_rev.pdf" "main_rev" 1708561359
   "/etc/texmf/web2c/texmf.cnf" 1676647435 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/liamo/invmod/main_rev.tex" 1708490612 86607 aa8291c36ea390f6a91ea600775b6d3c ""
+  "/home/liamo/invmod/main_rev.tex" 1708561357 86881 37adab31c3efa5494f989af0de336a7f ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ectt1000.tfm" 1136768653 1536 06717a2b50de47d4087ac0e6cd759455 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1246382020 1120 1e8878807317373affa7f7bba4cf2f6a ""
@@ -122,9 +122,9 @@
   "diff_plot/approx.pdf" 1708456647 16920 ea566fe5787ca41cbc8508299fec06e7 ""
   "legend_kdvb.pdf" 1708456646 18269 cf227745833034c16ad5ded3c569cdc6 ""
   "loop.pdf" 1708456647 104962 cfe6c0b8e05d4c23de83e9e64da45ba7 ""
-  "main_rev.aux" 1708490613 16687 2dced52ba055cb2b9ed2899d35e5c40d "pdflatex"
-  "main_rev.bbl" 1708490613 24892 db7013de0a443be3cd7abe549a03c2de "bibtex main_rev"
-  "main_rev.tex" 1708490612 86607 aa8291c36ea390f6a91ea600775b6d3c ""
+  "main_rev.aux" 1708561358 16714 970f1d27c48bcd30c75a93bd7b8b555f "pdflatex"
+  "main_rev.bbl" 1708558783 24892 db7013de0a443be3cd7abe549a03c2de "bibtex main_rev"
+  "main_rev.tex" 1708561357 86881 37adab31c3efa5494f989af0de336a7f ""
   "qdev.pdf" 1708456647 23309 b7e7c5c20e40608d6d5ddc92a17ccd7e ""
   "sapprox/PLTC/all.pdf" 1708456660 17985 a6183015aef6709813144538733264a3 ""
   (generated)

@@ -11,6 +11,7 @@
 \citation{Du2013}
 \citation{Law2012}
 \citation{Fan2020,FrerixThomas2021VDAw,Zhao2022,mowlavi_optimal_2023}
+\citation{mowlavi_optimal_2023}
 \newlabel{FirstPage}{{}{1}{}{}{}}
 \@writefile{toc}{\contentsline {title}{Iterative Methods for Navier--Stokes Inverse Problems}{1}{}}
 \@writefile{toc}{\contentsline {abstract}{Abstract}{1}{}}
@@ -29,24 +30,24 @@
 \citation{Nguyen2022}
 \citation{imanuvilov_2022}
 \newlabel{costoutro}{{3}{2}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {II}Overview of Methods}{2}{}}
-\newlabel{secmethods}{{II}{2}{}{}{}}
-\newlabel{kdvb}{{4}{2}{}{}{}}
 \citation{Steiner2012}
 \citation{10.1093/imanum/8.1.141}
 \citation{doi:10.1137/0916069}
 \citation{Note2}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Overview of Methods}{3}{}}
+\newlabel{secmethods}{{II}{3}{}{}{}}
+\newlabel{kdvb}{{4}{3}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {A}Direct Adjoint-Looping (DAL)}{3}{}}
 \newlabel{secDAL}{{II\,A}{3}{}{}{}}
 \newlabel{for}{{6}{3}{}{}{}}
 \newlabel{fc}{{7}{3}{}{}{}}
 \newlabel{adj}{{8}{3}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Conceptual illustration of iterative methods. Purple: the target solution $\overline  {u}(x, t)$ is known only at the final time $t_f$. Blue: we evolve a trial state $u(x, 0)$ to $u(x, t_f)$ where we then initialize one of three backward integration systems using a single compatibility condition. Each backward integration gives a solution at $t=0$ which we use to update our trial initial condition. We seek the trial solution's deviation $u'=u-\overline  {u}$ at the initial time $t=0$. Yellow: Direct Adjoint Looping (DAL) is a linear backward integration. For advective systems such as KdVB and Navier--Stokes, DAL advects the final deviation $u'(x,t_f)$ by the trial solution $u$. Orange: Simple Backward Integration (SBI) is a hybrid method, which supplements the linear DAL system with two additional advective terms. Red: the Quasi-Reversible Method (QRM) aims to compute the deviation by introducing a small hyperdiffusive term with coefficient $\varepsilon $. The QRM backward integration is ill-posed when $\varepsilon =0$ and numerically unstable as $\varepsilon \searrow 0$.}}{3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Conceptual illustration of iterative methods. Purple: the target solution $\overline  {u}(x, t)$ is known only at the final time $t_f$. Blue: we evolve a trial state $u(x, 0)$ to $u(x, t_f)$ where we then initialize one of three backward integration systems using a single compatibility condition. Each backward integration gives a solution at $t=0$ which we use to update our trial initial condition. We seek the trial solution's deviation $u'=u-\overline  {u}$ at the initial time $t=0$. Yellow: Direct Adjoint Looping (DAL) is a linear backward integration. For advective systems such as KdVB and Navier--Stokes, DAL advects the final deviation $u'(x,t_f)$ by the trial solution $u$. Orange: Simple Backward Integration (SBI) is a hybrid method, which supplements the linear DAL system with two additional advective terms. Red: the Quasi-Reversible Method (QRM) aims to compute the deviation by introducing a small hyperdiffusion term with coefficient $\varepsilon $. The QRM backward integration is ill-posed when $\varepsilon =0$ and numerically unstable as $\varepsilon \to 0$.}}{3}{}}
 \newlabel{adj_diag}{{1}{3}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}SBI and QRM Setup}{3}{}}
-\newlabel{secsetup}{{II\,B}{3}{}{}{}}
 \citation{Note3}
 \citation{Burns2020}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}SBI and QRM Setup}{4}{}}
+\newlabel{secsetup}{{II\,B}{4}{}{}{}}
 \newlabel{burgpert}{{9}{4}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {C}Simple Backward Integration (SBI)}{4}{}}
 \newlabel{secSBI}{{II\,C}{4}{}{}{}}

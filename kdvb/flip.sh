@@ -11,8 +11,8 @@ moveit () {
     cp -r $origin/$suffix/* $suffix
 }
 
-destination="Csbi"
-origin="Cnot"
+destination="Cnot"
+origin="Csbi"
 
 
 
