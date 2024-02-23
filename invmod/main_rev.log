@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.5.30)  21 FEB 2024 18:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.5.30)  22 FEB 2024 11:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -266,34 +266,14 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 \openout3 = `main_revNotes.bib'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 119.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 130.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 119.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 130.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 1052) in paragraph at lines 117--127
- \OT1/cmr/m/n/9 for-ward in time, the ret-ro-spec-tive (back-ward in time) in-verse prob-lem of-ten has its own 
- []
-
-
-Underfull \hbox (badness 3746) in paragraph at lines 117--127
- \OT1/cmr/m/n/9 chal-lenges and ap-pli-ca-tions. Di-rect Ad-joint Loop-ing (DAL) is the de-facto ap-proach 
- []
-
-
-Underfull \hbox (badness 1831) in paragraph at lines 117--127
- \OT1/cmr/m/n/9 for solv-ing ret-ro-spec-tive in-verse prob-lems, but it has not been ap-plied to de-ter-min-is-tic 
- []
-
-
-Overfull \hbox (116.0pt too wide) in paragraph at lines 117--127
- [][][][][][] 
- []
-
-
 Underfull \hbox (badness 1655) in paragraph at lines 141--149
 []\OT1/cmr/m/n/10 Despite po-ten-tial dif-fi-cul-ties, ret-ro-spec-tive in-verse
  []
@@ -571,42 +551,46 @@ Underfull \hbox (badness 1430) in paragraph at lines 877--885
  []
 
 [11]
+Underfull \hbox (badness 1215) in paragraph at lines 948--953
+\OT1/cmr/m/n/10 grant 80NSSC20K1280. D.L., K.J.B., J.S.O., and
+ []
+
 File: legend_kdvb.pdf Graphic file (type pdf)
 <use legend_kdvb.pdf>
-Package pdftex.def Info: legend_kdvb.pdf  used on input line 959.
+Package pdftex.def Info: legend_kdvb.pdf  used on input line 961.
 (pdftex.def)             Requested size: 361.34999pt x 13.83102pt.
 <PLTD/sall.pdf, id=435, 513.11702pt x 317.12373pt>
 File: PLTD/sall.pdf Graphic file (type pdf)
 <use PLTD/sall.pdf>
-Package pdftex.def Info: PLTD/sall.pdf  used on input line 960.
+Package pdftex.def Info: PLTD/sall.pdf  used on input line 962.
 (pdftex.def)             Requested size: 361.34999pt x 223.33514pt.
 <sapprox/PLTC/all.pdf, id=436, 289.08pt x 158.99399pt>
 File: sapprox/PLTC/all.pdf Graphic file (type pdf)
 <use sapprox/PLTC/all.pdf>
-Package pdftex.def Info: sapprox/PLTC/all.pdf  used on input line 992.
+Package pdftex.def Info: sapprox/PLTC/all.pdf  used on input line 994.
 (pdftex.def)             Requested size: 252.94499pt x 139.11938pt.
 
-Overfull \hbox (6.94499pt too wide) in paragraph at lines 992--995
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 994--997
  [][] 
  []
 
 <PLT20DS/both.pdf, id=437, 289.08pt x 158.99399pt>
 File: PLT20DS/both.pdf Graphic file (type pdf)
 <use PLT20DS/both.pdf>
-Package pdftex.def Info: PLT20DS/both.pdf  used on input line 1013.
+Package pdftex.def Info: PLT20DS/both.pdf  used on input line 1015.
 (pdftex.def)             Requested size: 252.94499pt x 139.11938pt.
 
-Overfull \hbox (6.94499pt too wide) in paragraph at lines 1013--1014
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 1015--1016
  [][] 
  []
 
 <PLT200DS/both.pdf, id=438, 289.08pt x 158.99399pt>
 File: PLT200DS/both.pdf Graphic file (type pdf)
 <use PLT200DS/both.pdf>
-Package pdftex.def Info: PLT200DS/both.pdf  used on input line 1020.
+Package pdftex.def Info: PLT200DS/both.pdf  used on input line 1022.
 (pdftex.def)             Requested size: 252.94499pt x 139.11938pt.
 
-Overfull \hbox (6.94499pt too wide) in paragraph at lines 1020--1021
+Overfull \hbox (6.94499pt too wide) in paragraph at lines 1022--1023
  [][] 
  []
 
@@ -627,15 +611,15 @@ Use \affiliation instead.
 
 [14] (./main_rev.aux) ) 
 Here is how much of TeX's memory you used:
- 5751 strings out of 478287
- 80821 string characters out of 5849289
- 419479 words of memory out of 5000000
- 23871 multiletter control sequences out of 15000+600000
+ 5749 strings out of 478287
+ 80800 string characters out of 5849289
+ 424644 words of memory out of 5000000
+ 23869 multiletter control sequences out of 15000+600000
  480440 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  69i,13n,76p,1265b,397s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on main_rev.pdf (14 pages, 2271759 bytes).
+Output written on main_rev.pdf (14 pages, 2272744 bytes).
 PDF statistics:
  735 PDF objects out of 1000 (max. 8388607)
  355 compressed objects within 4 object streams

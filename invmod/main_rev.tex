@@ -116,7 +116,7 @@
 \begin{abstract}
   Even when the partial differential equation underlying a physical process can be evolved forward in time, the retrospective (backward in time) inverse problem often has its own challenges and applications.
   % The equations underlying physical processes can be evolved forward, and occasionally backward in time to extend the scope of our insight.
-  Direct Adjoint Looping (DAL) is the defacto approach for solving retrospective inverse problems, but it has not been applied to deterministic \hly{retrospective} Navier--Stokes inverse problems in 2D or 3D.
+  Direct Adjoint Looping (DAL) is the defacto approach for solving retrospective inverse problems, but it has not been applied to deterministic \colorbox{lime}{retrospective} Navier--Stokes inverse problems in 2D or 3D.
   In this paper, we demonstrate that DAL is ill-suited for solving retrospective 2D Navier--Stokes inverse problems. 
   Alongside DAL, we study two other iterative methods: Simple Backward Integration (SBI) and the Quasi-Reversible Method (QRM).
   Our iterative SBI approach is novel while iterative QRM has previously been used.
@@ -484,7 +484,7 @@ These updates approximate the initial deviation as it shrinks with each iteratio
 Both curves have relatively large features coinciding with the target initial condition's peak at $x=\pi$.
 The SBI deviation has a larger maximum magnitude while the QRM deviation oscillates at a particular wavenumber.
 When we increase $\varepsilon$, these oscillations subside, but it requires more iterations to obtain a comparable result.
-We select $\varepsilon = 0.01$ for publication to illustrate the presence of these oscillations, while still achieving the desired outcome in a small number of iterations.
+We select $\varepsilon = 0.01$ to illustrate the presence of these oscillations, while still achieving the desired outcome in a small number of iterations.
 }
 
 \begin{figure}
@@ -944,15 +944,17 @@ Efficient algorithms for computing time-periodic solutions would have direct app
 
 % \clearpage
 
-% \section*{Acknowledgments}
-% The authors thank Emma Kaufman, Benjamin Hyatt, Whitney Powers, Ilaria Fontana, and Adrian Fraser for their valuable suggestions.
-% We thank the \texttt{Dedalus} development team. 
-% Computations were conducted with support by the NASA High End Computing (HEC) Program through the NASA Advanced Supercomputing (NAS) Division at Ames Research Center on Pleiades with allocation GIDs s2276.
-% This material is based upon work supported by the National Science Foundation Graduate Research Fellowship under Grant No. (NSF grant number), as well as the National Aeronautics and Space Administration under Grant No. 80NSSC20K1280 issued through the Heliophysics Theory, Modeling, and Simulation Program.
+\section*{Acknowledgments}
+The authors thank Emma Kaufman, Benjamin Hyatt, Whitney Powers, Ilaria Fontana, and Adrian Fraser for their valuable suggestions.
+We thank the \texttt{Dedalus} development team. 
+L.O., D.L., K.A., K.J.B., J.S.O., and B.P.B. are supported in part by NASA HTMS grant 80NSSC20K1280. D.L., K.J.B., J.S.O., and B.P.B. are supported in part by NASA OSTFL grant 80NSSC22K1738. 
+L.O. is supported by the National Science Foundation Graduate Research Fellowship under Grant No. (DGE-2234667).
+Computations were conducted with support by the NASA High End Computing Program through the NASA Advanced Supercomputing (NAS) Division at Ames Research Center on Pleiades with allocation GID s2276.
 
-\section{Appendix}\label{secAppendix}
+
+\appendix\label{secAppendix}
 % 
-\subsection{KdVB Inverse Problem Objectives using SBI Initial Guess}\label{secAppKdVBSBI}
+\section{KdVB Inverse Problem Objectives using SBI Initial Guess}\label{secAppKdVBSBI}
 
 \begin{figure*}
   \centering
@@ -997,7 +999,7 @@ However SBI and QRM both surpass DAL, with QRM performing best by several orders
   %  \label{shearstudy}
 \end{figure}
 
-\subsection{Navier--Stokes Inverse Problem Objectives using SBI Initial Guess}\label{secAppNSBI}
+\section{Navier--Stokes Inverse Problem Objectives using SBI Initial Guess}\label{secAppNSBI}
 
 For the Navier--Stokes inverse problem described in Section \ref{secNS}, we compare each method (DAL, SBI, and QRM) starting with an initial guess generated via SBI. 
 This case mimics \cite{Li2017,Liu2008}, who began by rewinding their target state from $t:t_f\to 0$ using SBI. 
