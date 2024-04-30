@@ -13,9 +13,10 @@ The codes associated with the Kortweg--de Vries--Burgers inverse problem are loc
 ### 2. Incompressible Naver--Stokes equation
 
 $\nabla\cdot\mathbf{u}=0$
+
 $\partial_t \mathbf{u} +\mathbf{u}\cdot\nabla\mathbf{u} + \nabla p- \nu\nabla^2\mathbf{u} = 0$.
 
-The codes associated with the Navier--Stokes inverse problem are located in the subdirectory `adjop/shear/`. To run these codes, the user must must:
+The codes associated with the Navier--Stokes inverse problem are located in the subdirectory `adjop/shear/`. To run these codes, the user must:
 1. edit the configuration file `adjop/shear/new_config.cfg`
 2. run the command `bash JobFactory.sh new_config.cfg` to generate a new optimization study in a new directory with the specified suffix as name. Note that this workflow is configured to be used with the PBS supercomputing protocol. To run your script locally, use the `RunDevel.sh`
 
