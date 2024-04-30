@@ -1,7 +1,7 @@
 # adjop
 Python and bash scripts to accompany the manuscript "Iterative Methods for Navier--Stokes Inverse Problems", Physical Review E, DOI: 10.1103/PhysRevE.109.045108
 
-Using the codes in this repository, a user can solve solve inverse problems constrained by:
+Using the codes in this repository, a user can solve inverse problems constrained by:
 ### 1. Kortweg--de Vries--Burgers equation
 
 $\partial_t u +u\partial_x u - a\partial_x^2u + b\partial_x^3 u = 0$
