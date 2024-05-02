@@ -25,6 +25,6 @@ In both of the configurations outlined above, there are important options which 
 1. the `suffix` parameter (string) is the name of the study. If you don't change this between runs, you will overwrite the directory named `$suffix/`
 2. the `abber` parameter (float) encodes your choice of backward integration method. abber = 0 uses DAL; abber = 1 uses SBI; otherwise, abber is the negative $\varepsilon$ parameter described for QRM in the paper.
 3. the `method` parameter (string) can be set to any of the scipy optimization routines located in `scipy.optimize`. Otherwise, you can use `euler` which corresponds to gradient descent. 
-4. [SHEAR ONLY] the `MPIPROC` parameter (int) corresponds to the number of processes you will use in each solve (parallel computing with MPI). Be sure to account for your machine's specs when setting this.
+4. [SHEAR ONLY] the `MPIPROC` parameter (int) corresponds to the number of processes you will use in each solve (parallel computing with MPI). Be sure to account for your machine's specs.
 
 Email any further questions to Liam O'Connor at liamoconnor2025@u.northwestern.edu
