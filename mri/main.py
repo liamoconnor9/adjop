@@ -1,7 +1,7 @@
 """
 Usage:
-    shear_abber.py <config_file>
-    shear_abber.py <config_file> <SBI_config>
+    main.py <config_file>
+    main.py <config_file> <SBI_config>
 """
 from distutils.command.bdist import show_formats
 import os
@@ -27,8 +27,8 @@ CW = MPI.COMM_WORLD
 import logging
 import pathlib
 logger = logging.getLogger(__name__)
-# import ForwardShear
-# import BackwardShear
+import Forward
+import Backward
 import matplotlib.pyplot as plt
 from docopt import docopt
 from pathlib import Path
@@ -63,27 +63,54 @@ if (args['<SBI_config>'] != None):
     locals().update(sbi_dict)
 logger.info('doSBI = {}'.format(doSBI))
 
-sys.exit()
 # Simulation Parameters
 
 dealias = 3/2
-coords = d3.CartesianCoordinates('x', 'z')
-dist = d3.Distributor(coords, dtype=np.float64)
-coords.name = coords.names
+dtype = np.float64
 
-xbasis = d3.RealFourier(coords['x'], size=Nx, bounds=(0, Lx), dealias=dealias)
-zbasis = d3.RealFourier(coords['z'], size=Nz, bounds=(-Lz/2, Lz/2), dealias=dealias)
-bases = [xbasis, zbasis]
-x, z = dist.local_grids(bases[0], bases[1])
-ex, ez = coords.unit_vector_fields(dist)
+# Bases
+coords = d3.CartesianCoordinates('y', 'z', 'x')
+dist = d3.Distributor(coords, dtype=dtype)
+ybasis = d3.RealFourier(coords['y'], size=Ny, bounds=(0, Ly), dealias=dealias)
+zbasis = d3.RealFourier(coords['z'], size=Nz, bounds=(0, Lz), dealias=dealias)
+xbasis = d3.ChebyshevT(coords['x'], size=Nx, bounds=(-Lx / 2.0, Lx / 2.0), dealias=dealias)
+y, z, x = dist.local_grids(ybasis, zbasis, xbasis)
+ey = dist.VectorField(coords, name='ey')
+ez = dist.VectorField(coords, name='ez')
+ex = dist.VectorField(coords, name='ex')
+ey['g'][0] = 1
+ez['g'][1] = 1
+ex['g'][2] = 1
 
-domain = domain.Domain(dist, bases)
-dist = domain.dist
+dist_layout = dist.layout_references[opt_layout]
+bases = [ybasis, zbasis, xbasis]
+domain = Domain(dist, bases)
+
+S = -f * Ro
+eta = nu / Pm
+
+forward_params = {
+    "Ly"  : Ly,
+    "Lz"  : Lz,
+    "Lx"  : Lx,
+    "S"   : S,
+    "f"   : f,
+    "nu"  : nu,
+    "eta" : eta,
+    "tau" : tau,
+    "isNoSlip" : isNoSlip
+
+}
+backward_params = forward_params
+
 slices = dist.layout_references[opt_layout].slices(domain, scales=1)
 slices_grid = dist.grid_layout.slices(domain, scales=1)
 
-forward_problem = ForwardShear.build_problem(domain, coords, Reynolds)
-backward_problem = BackwardShear.build_problem(domain, coords, Reynolds, abber)
+forward_problem = Forward.build_problem(domain, coords, forward_params)
+backward_problem = Backward.build_problem(domain, coords, backward_params)
+
+logger.info('success')
+sys.exit()
 
 # forward, and corresponding adjoint variables (fields)
 u = forward_problem.variables[0]
