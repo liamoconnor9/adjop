@@ -99,5 +99,6 @@ else
     $MPIPREFFIX $MPIPROC python3 main.py $CONFIG SBI.cfg
 fi
 
-exit 1
+# echo "yi"
+# exit 1
 $MPIPREFFIX $MPIPROC python3 main.py $CONFIG

@@ -63,6 +63,7 @@ if (args['<SBI_config>'] != None):
     locals().update(sbi_dict)
 logger.info('doSBI = {}'.format(doSBI))
 
+sys.exit()
 # Simulation Parameters
 
 dealias = 3/2
