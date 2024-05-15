@@ -59,7 +59,7 @@ class ConfigEval(ConfigParser, dict):
 
     def forward_aliases(self):
         self.aliases = {}
-        self.aliases['Reynolds'] = self.parse('Re')
+        # self.aliases['Reynolds'] = self.parse('Re')
         self.aliases['max_timestep'] = self.parse('dt')
 
         # self.settings['Schmidt'] = 1

@@ -119,17 +119,17 @@ def build_problem(domain, coords, params):
 
     if (params["isNoSlip"]):
         # no-slip BCs
-        problem.add_equation("u_t(x='left')  = 0")
-        problem.add_equation("u_t(x='right') = 0")
+        problem.add_equation("u(x='left')  = 0")
+        problem.add_equation("u(x='right') = 0")
     else:
         # stress-free BCs
         if True:
-            problem.add_equation("dot(u_t, ex)(x='left')      = 0")
-            problem.add_equation("dot(u_t, ex)(x='right')     = 0")
-            problem.add_equation("dot(dx(u_t), ey)(x='left')  = 0")
-            problem.add_equation("dot(dx(u_t), ey)(x='right') = 0")
-            problem.add_equation("dot(dx(u_t), ez)(x='left')  = 0")
-            problem.add_equation("dot(dx(u_t), ez)(x='right') = 0")
+            problem.add_equation("dot(u, ex)(x='left')      = 0")
+            problem.add_equation("dot(u, ex)(x='right')     = 0")
+            problem.add_equation("dot(dx(u), ey)(x='left')  = 0")
+            problem.add_equation("dot(dx(u), ey)(x='right') = 0")
+            problem.add_equation("dot(dx(u), ez)(x='left')  = 0")
+            problem.add_equation("dot(dx(u), ez)(x='right') = 0")
         else:
             problem.add_equation("dot(u, ex)(x='left')      = dot(U0, ex)(x='left')")
             problem.add_equation("dot(u, ex)(x='right')     = dot(U0, ex)(x='right')")
@@ -138,13 +138,13 @@ def build_problem(domain, coords, params):
             problem.add_equation("dot(dx(u), ez)(x='left')  = dot(dx(U0), ez)(x='left')")
             problem.add_equation("dot(dx(u), ez)(x='right') = dot(dx(U0), ez)(x='right')")
 
-    problem.add_equation("integ(p_t)       = 0") 
-    problem.add_equation("phi_t(x='left')  = 0")
-    problem.add_equation("phi_t(x='right') = 0")
+    problem.add_equation("integ(p)       = 0") 
+    problem.add_equation("phi(x='left')  = 0")
+    problem.add_equation("phi(x='right') = 0")
 
-    problem.add_equation("dot(A_t, ey)(x='left')  = 0")
-    problem.add_equation("dot(A_t, ez)(x='left')  = 0")
-    problem.add_equation("dot(A_t, ey)(x='right') = 0")
-    problem.add_equation("dot(A_t, ez)(x='right') = 0")
+    problem.add_equation("dot(A, ey)(x='left')  = 0")
+    problem.add_equation("dot(A, ez)(x='left')  = 0")
+    problem.add_equation("dot(A, ey)(x='right') = 0")
+    problem.add_equation("dot(A, ez)(x='right') = 0")
 
     return problem
