@@ -110,7 +110,6 @@ forward_problem = Forward.build_problem(domain, coords, forward_params)
 backward_problem = Backward.build_problem(domain, coords, backward_params)
 
 logger.info('success')
-sys.exit()
 
 # forward, and corresponding adjoint variables (fields)
 u = forward_problem.variables[0]
@@ -248,6 +247,7 @@ opt.opt_layout = opt_layout
 opt.opt_scales = opt_scales
 opt.add_handlers = add_handlers
 opt.handler_loop_cadence = handler_loop_cadence
+sys.exit()
 
 opt.init_layout(u)
 
