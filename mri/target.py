@@ -96,6 +96,11 @@ forward_params = {
 
 }
 problem = Forward.build_problem(domain, coords, forward_params)
+p   = problem.variables[1]
+phi = problem.variables[1]
+u   = problem.variables[2]
+A   = problem.variables[3]
+b   = d3.Curl(A) 
 
 # Solver
 solver = problem.build_solver(forward_timestepper)
@@ -130,7 +135,8 @@ if (loadic and not "ubar" in str(ic_file)):
     u[opt_layout] = udata.copy()
     logger.info('Successfully populated initial condition from write file.')
 else:
-    # u['g'][0] = 1/2 + 1/2 * (np.tanh((z-0.5)/0.1) - np.tanh((z+0.5)/0.1))
+    logger.info('constructing initial condition')
+    u['g'][0] = 1/2 + 1/2 * (np.tanh((z-0.5)/0.1) - np.tanh((z+0.5)/0.1))
     # Add small vertical velocity perturbations localized to the shear layers
     u['g'][1] += 0.1 * np.sin(2*np.pi*x/Lx) * np.exp(-(z-0.5)**2/0.01)
     u['g'][1] += 0.1 * np.sin(2*np.pi*x/Lx) * np.exp(-(z+0.5)**2/0.01)
@@ -142,10 +148,12 @@ else:
 if (loadic):
     checkpoints = solver.evaluator.add_file_handler(icstr[:-4] + '_checkpoint', max_writes=100, sim_dt=0.1, mode='overwrite')
     checkpoints.add_tasks(solver.state, layout='g')
+    checkpoints.add_task(b, name='b', layout='g')
     # checkpoints.add_tasks(vort, name='vorticity', layout='g')
 
 else:
     checkpoints = solver.evaluator.add_file_handler(path + '/' + suffix + '/checkpoint_{}'.format(label), max_writes=2, sim_dt=T, mode='overwrite')
+    checkpoints.add_task(b, name='b', layout='g')
     checkpoints.add_tasks(solver.state, layout='g')
 
 # CFL
