@@ -85,10 +85,10 @@ class OptimizationContext:
         self.show_backward = False
         self.gamma_init = 0.01
 
-        self.new_x = forward_solver.state[0].copy()
-        self.new_grad = forward_solver.state[0].copy()
-        self.old_x = forward_solver.state[0].copy()
-        self.old_grad = forward_solver.state[0].copy()
+        self.new_x = forward_solver.state[2].copy()
+        self.new_grad = forward_solver.state[2].copy()
+        self.old_x = forward_solver.state[2].copy()
+        self.old_grad = forward_solver.state[2].copy()
 
         self.new_x.name = "new_x"
         self.new_grad.name = "new_grad"
@@ -237,8 +237,8 @@ class OptimizationContext:
 
         # Grab before fields are evolved (old state)
         self.old_grad.change_scales(scales)
-        self.backward_solver.state[0].change_scales(scales)
-        self.old_grad[layout] = self.backward_solver.state[0][layout].copy()
+        self.backward_solver.state[2].change_scales(scales)
+        self.old_grad[layout] = self.backward_solver.state[2][layout].copy()
 
         self.load_from_global_coeff_data(self.global_reshape(x))
         # self.jac_layout.change_scales(1)
@@ -255,8 +255,8 @@ class OptimizationContext:
         self.set_forward_ic()
         self.before_fullforward_solve()
         self.solve_forward_full()
-        self.forward_solver.state[0].change_scales(1)
-        self.uT = self.forward_solver.state[0]['g'].copy()
+        self.forward_solver.state[2].change_scales(1)
+        self.uT = self.forward_solver.state[2]['g'].copy()
         
         self.evaluate_stateT()
         self.after_fullforward_solve()
@@ -292,7 +292,7 @@ class OptimizationContext:
         self.new_grad.change_scales(1)
 
         self.old_grad[layout] = self.new_grad[layout].copy()
-        self.new_grad[layout] = self.backward_solver.state[0][layout].copy()
+        self.new_grad[layout] = self.backward_solver.state[2][layout].copy()
 
         self.old_grad.change_scales(scales)
         self.new_grad.change_scales(scales)
@@ -314,16 +314,16 @@ class OptimizationContext:
         self.after_backward_solve()
         self.loop_index += 1
         
-        self.backward_solver.state[0].change_layout(layout)
-        data = -1e0*self.backward_solver.state[0].allgather_data()
+        self.backward_solver.state[2].change_layout(layout)
+        data = -1e0*self.backward_solver.state[2].allgather_data()
         self.fprime = data.flatten().copy()
 
-        self.backward_solver.state[0].change_layout('g')
-        self.backward_solver.state[0].change_scales(scales)
+        self.backward_solver.state[2].change_layout('g')
+        self.backward_solver.state[2].change_scales(scales)
         self.jac_layout.change_scales(1)
         # logger.info('changing opt scales post-loop to scales = {}'.format(scales))
-        # datag = -1e0*self.backward_solver.state[0].allgather_data()
-        self.jac_layout['g'] = -1e0*self.backward_solver.state[0]['g'].copy()
+        # datag = -1e0*self.backward_solver.state[2].allgather_data()
+        self.jac_layout['g'] = -1e0*self.backward_solver.state[2]['g'].copy()
         # if (self.skew_gradgrad):
         #     w0 = d3.skew()
         self.jac_layout.change_scales(1)
@@ -332,7 +332,7 @@ class OptimizationContext:
         # logger.info('fprime shape = {}'.format(np.shape(self.fprime)))
         # logger.info('fprimejl shape = {}'.format(np.shape(self.fprimejl)))
         return self.fprime
-        # return self.gamma_init * self.backward_solver.state[0].allgather_data(layout=layout).flatten().copy()
+        # return self.gamma_init * self.backward_solver.state[2].allgather_data(layout=layout).flatten().copy()
         
     # Set starting point for loop
     def set_forward_ic(self):

@@ -57,7 +57,7 @@ class JacLayout(OptimizationContext):
     def global_reshape(self, array):
         if (self.domain.dim == 1):
             return array
-        return np.reshape(array, (2,) + self.optdistshape)
+        return np.reshape(array, (3,) + self.optdistshape)
         # self.jac_layout['c'] = narray.copy()
 
     def load_from_global_coeff_data(self, global_data, pre_slices=tuple()):
