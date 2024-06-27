@@ -117,22 +117,22 @@ def build_problem(domain, coords, params):
 
     # NS_LHS += d3.dot(u, d3.grad(U0)) + d3.dot(U0, grad_u)
 
-    if tau > 0:
-        TAU['g'] = tau
-        NS_LHS -= u_t / TAU
+    # if tau > 0:
+    #     TAU['g'] = tau
+    #     NS_LHS -= u_t / TAU
 
-    elif tau < 0:
-        # using the sign of tau here to trigger averaging
-        TAU['g'] = -tau
-        NS_LHS -= integy(integz(u_t)) / TAU / Ly / Lz
+    # elif tau < 0:
+    #     # using the sign of tau here to trigger averaging
+    #     TAU['g'] = -tau
+    #     NS_LHS -= integy(integz(u_t)) / TAU / Ly / Lz
 
     # IND_LHS = dt(A_t) + d3.grad(phid) - eta*d3.div(grad_A_t) + lift(tau2A,-1) - d3.cross(U0, d3.curl(A))
     # IND_RHS = d3.cross(u, b)
 
-    IND_LHS = dt(b_t) - d3.cross(U0, d3.curl(b_t)) + eta*d3.div(grad_b_t) + d3.grad(phi_t)
+    IND_LHS = dt(A_t) - d3.cross(U0, d3.curl(b_t)) + eta*d3.div(grad_b_t) + d3.grad(phi_t)
     IND_RHS = d3.cross(u, d3.curl(b_t)) + N(u_t, b) - 2*b
 
-    problem = d3.IVP([p_t, phi_t, u_t, b_t, taup_t, tau1u_t, tau2u_t, tau1A_t, tau2A_t], namespace=locals())
+    problem = d3.IVP([p_t, phi_t, u_t, A_t, taup_t, tau1u_t, tau2u_t, tau1A_t, tau2A_t], namespace=locals())
     problem.add_equation((DIVU_LHS, DIVU_RHS))
     problem.add_equation((DIVA_LHS, DIVA_RHS))
     problem.add_equation((NS_LHS,   NS_RHS))
