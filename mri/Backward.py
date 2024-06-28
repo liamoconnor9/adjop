@@ -112,10 +112,10 @@ def build_problem(domain, coords, params):
         TAU['g'] = tau
         NS_LHS -= u_t / TAU
 
-    elif tau < 0:
-        # using the sign of tau here to trigger averaging
-        TAU['g'] = -tau
-        NS_LHS -= integy(integz(u_t)) / TAU / Ly / Lz
+    # elif tau < 0:
+    #     # using the sign of tau here to trigger averaging
+    #     TAU['g'] = -tau
+    #     NS_LHS -= integy(integz(u_t)) / TAU / Ly / Lz
 
     # IND_LHS = dt(A_t) + d3.grad(phid) - eta*d3.div(grad_A_t) + lift(tau2A,-1) - d3.cross(U0, d3.curl(A))
     # IND_RHS = d3.cross(u, b)

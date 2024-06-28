@@ -83,21 +83,8 @@ def build_problem(domain, coords, params):
 
     NS_LHS = dt(u) - nu*d3.div(grad_u) + d3.grad(p) + d3.cross(fz_hat, u) + lift(tau2u,-1) 
     NS_RHS = d3.cross(u, d3.curl(u)) - d3.cross(b, d3.curl(b))
-    # NS_RHS = d3.dot(b, grad_b) - d3.dot(u, grad_u)
 
-    # NS_LHS += d3.cross(B0, d3.curl(d3.curl(A))) + d3.cross(d3.curl(A), d3.curl(B0))
-    NS_LHS += d3.dot(u, d3.grad(U0)) + d3.dot(U0, grad_u)
-
-    if tau > 0:
-        TAU['g'] = tau
-        NS_LHS += u / TAU
-
-    elif tau < 0:
-        # using the sign of tau here to trigger averaging
-        TAU['g'] = -tau
-        NS_LHS += integy(integz(u)) / TAU / Ly / Lz
-
-    IND_LHS = dt(A) + d3.grad(phi) - eta*d3.div(grad_A) + lift(tau2A,-1) - d3.cross(U0, d3.curl(A))
+    IND_LHS = dt(A) + d3.grad(phi) - eta*d3.div(grad_A) + lift(tau2A,-1)
     IND_RHS = d3.cross(u, b)
 
     problem = d3.IVP([p, phi, u, A, taup, tau1u, tau2u, tau1A, tau2A], namespace=locals())
@@ -109,34 +96,26 @@ def build_problem(domain, coords, params):
     # b.grad(b) = j x b
     # u.grad(u) = omega x u
 
-    # problem.add_equation("dt(u) + dot(u,grad(U0)) + dot(U0,grad(u)) - nu*div(grad_u) + grad(p) + cross(fz_hat, u) + lift(tau2u,-1) - dot(curl(A), grad_B0) = dot(B0, grad_b) + dot(b, grad_b) - dot(u,grad(u))")
-    # problem.add_equation("dt(A) + grad(phi) - eta*div(grad_A) + lift(tau2A,-1) - cross(U0, curl(A)) - cross(u, B0) = cross(u, b)")
-    # # 30 transforms per timestep
-
-    # problem.add_equation("dt(u) + dot(u,grad(U0)) + dot(U0,grad(u)) - nu*div(grad_u) + grad(p) + cross(fz_hat, u) + lift(tau2u,-1) - dot(curl(A), grad_B0) = dot(B0, grad_b) + dot(b, grad_b) - dot(u,grad(u))")
-    # problem.add_equation("dt(A) + grad(phi) - eta*div(grad_A) + lift(tau2A,-1) - cross(U0, curl(A)) - cross(u, B0) = cross(u, b)")
-    # # 30 transforms per timestep
-
     if (params["isNoSlip"]):
         # no-slip BCs
         problem.add_equation("u(x='left')  = 0")
         problem.add_equation("u(x='right') = 0")
     else:
         # stress-free BCs
-        if True:
-            problem.add_equation("dot(u, ex)(x='left')      = 0")
-            problem.add_equation("dot(u, ex)(x='right')     = 0")
-            problem.add_equation("dot(dx(u), ey)(x='left')  = 0")
-            problem.add_equation("dot(dx(u), ey)(x='right') = 0")
-            problem.add_equation("dot(dx(u), ez)(x='left')  = 0")
-            problem.add_equation("dot(dx(u), ez)(x='right') = 0")
-        else:
-            problem.add_equation("dot(u, ex)(x='left')      = dot(U0, ex)(x='left')")
-            problem.add_equation("dot(u, ex)(x='right')     = dot(U0, ex)(x='right')")
-            problem.add_equation("dot(dx(u), ey)(x='left')  = dot(dx(U0), ey)(x='left')")
-            problem.add_equation("dot(dx(u), ey)(x='right') = dot(dx(U0), ey)(x='right')")
-            problem.add_equation("dot(dx(u), ez)(x='left')  = dot(dx(U0), ez)(x='left')")
-            problem.add_equation("dot(dx(u), ez)(x='right') = dot(dx(U0), ez)(x='right')")
+        # if True:
+        #     problem.add_equation("dot(u, ex)(x='left')      = 0")
+        #     problem.add_equation("dot(u, ex)(x='right')     = 0")
+        #     problem.add_equation("dot(dx(u), ey)(x='left')  = -S")
+        #     problem.add_equation("dot(dx(u), ey)(x='right') = -S")
+        #     problem.add_equation("dot(dx(u), ez)(x='left')  = 0")
+        #     problem.add_equation("dot(dx(u), ez)(x='right') = 0")
+        # else:
+        problem.add_equation("dot(u, ex)(x='left')      = dot(U0, ex)(x='left')")
+        problem.add_equation("dot(u, ex)(x='right')     = dot(U0, ex)(x='right')")
+        problem.add_equation("dot(dx(u), ey)(x='left')  = dot(dx(U0), ey)(x='left')")
+        problem.add_equation("dot(dx(u), ey)(x='right') = dot(dx(U0), ey)(x='right')")
+        problem.add_equation("dot(dx(u), ez)(x='left')  = dot(dx(U0), ez)(x='left')")
+        problem.add_equation("dot(dx(u), ez)(x='right') = dot(dx(U0), ez)(x='right')")
 
     problem.add_equation("integ(p)       = 0") 
     problem.add_equation("phi(x='left')  = 0")
