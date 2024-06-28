@@ -102,20 +102,11 @@ def build_problem(domain, coords, params):
     DIVU_LHS = d3.trace(grad_u_t) + taup_t
     DIVU_RHS = 0
 
-    DIVA_LHS = d3.trace(grad_b_t)
+    DIVA_LHS = d3.trace(grad_A_t)
     DIVA_RHS = 0
 
-    NS_LHS = dt(u_t) + d3.grad(p_t) + d3.cross(fz_hat, u_t) + nu*d3.div(grad_u_t) + N(u_t, U0)
+    NS_LHS = dt(u_t) + d3.grad(p_t) + d3.cross(fz_hat, u_t) + nu*d3.div(grad_u_t) + N(u_t, U0) + lift(tau2u_t,-1) 
     NS_RHS = -N(u_t, u) - d3.cross(b, d3.curl(b_t))
-
-
-    # NS_LHS = dt(u_t) + nu*d3.div(grad_u_t) + d3.grad(p_t) + d3.cross(fz_hat, u_t) + lift(tau2u_t,-1) 
-    # NS_RHS = d3.cross(u, d3.curl(u)) - d3.cross(b, d3.curl(b))
-    # NS_RHS = d3.dot(b, grad_b) - d3.dot(u, grad_u)
-
-    # NS_LHS += d3.cross(B0, d3.curl(d3.curl(A))) + d3.cross(d3.curl(A), d3.curl(B0))
-
-    # NS_LHS += d3.dot(u, d3.grad(U0)) + d3.dot(U0, grad_u)
 
     if tau > 0:
         TAU['g'] = tau
@@ -129,25 +120,15 @@ def build_problem(domain, coords, params):
     # IND_LHS = dt(A_t) + d3.grad(phid) - eta*d3.div(grad_A_t) + lift(tau2A,-1) - d3.cross(U0, d3.curl(A))
     # IND_RHS = d3.cross(u, b)
 
-    IND_LHS = dt(b_t) - d3.cross(U0, d3.curl(b_t)) + eta*d3.div(grad_b_t) + d3.grad(phi_t)
-    IND_RHS = d3.cross(u, d3.curl(b_t)) + N(u_t, b) - 2*b
+# 0 = -\nabla\tilde{\phi} + \mathbf{\tilde{A}}\times(\nabla\times\mathbf{A})-\partial_t\mathbf{\tilde{A}} -\nabla\times(\mathbf{\tilde{A}}\times \mathbf{u}) - \nabla\times\left( \mathbf{\tilde{u}}\times(\nabla\times\nabla\times\mathbf{A})\right) - \nabla^2\left( (\nabla\times\mathbf{A}) \times \mathbf{\tilde{u}}  \right) - \nu\nabla^2\mathbf{\tilde{A}}
 
-    problem = d3.IVP([p_t, phi_t, u_t, b_t, taup_t, tau1u_t, tau2u_t, tau1A_t, tau2A_t], namespace=locals())
+    IND_LHS = -dt(A_t) - d3.grad(phi_t) - nu*d3.div(grad_A_t) + lift(tau2A_t,-1) 
+    IND_RHS = -d3.cross(A_t, d3.curl(A)) + d3.curl(d3.cross(A_t, u)) + d3.curl(d3.cross(u_t, d3.curl(d3.curl(A)))) + d3.div(d3.grad(d3.cross((d3.curl(A)), u_t)))
+    problem = d3.IVP([p_t, phi_t, u_t, A_t, taup_t, tau1u_t, tau2u_t, tau1A_t, tau2A_t], namespace=locals())
     problem.add_equation((DIVU_LHS, DIVU_RHS))
     problem.add_equation((DIVA_LHS, DIVA_RHS))
     problem.add_equation((NS_LHS,   NS_RHS))
     problem.add_equation((IND_LHS,  IND_RHS))
-
-    # b.grad(b) = j x b
-    # u.grad(u) = omega x u
-
-    # problem.add_equation("dt(u) + dot(u,grad(U0)) + dot(U0,grad(u)) - nu*div(grad_u) + grad(p) + cross(fz_hat, u) + lift(tau2u,-1) - dot(curl(A), grad_B0) = dot(B0, grad_b) + dot(b, grad_b) - dot(u,grad(u))")
-    # problem.add_equation("dt(A) + grad(phi) - eta*div(grad_A) + lift(tau2A,-1) - cross(U0, curl(A)) - cross(u, B0) = cross(u, b)")
-    # # 30 transforms per timestep
-
-    # problem.add_equation("dt(u) + dot(u,grad(U0)) + dot(U0,grad(u)) - nu*div(grad_u) + grad(p) + cross(fz_hat, u) + lift(tau2u,-1) - dot(curl(A), grad_B0) = dot(B0, grad_b) + dot(b, grad_b) - dot(u,grad(u))")
-    # problem.add_equation("dt(A) + grad(phi) - eta*div(grad_A) + lift(tau2A,-1) - cross(U0, curl(A)) - cross(u, B0) = cross(u, b)")
-    # # 30 transforms per timestep
 
     if (params["isNoSlip"]):
         # no-slip BCs
@@ -173,11 +154,16 @@ def build_problem(domain, coords, params):
     problem.add_equation("integ(p_t)       = 0") 
     problem.add_equation("phi_t(x='left')  = 0")
     problem.add_equation("phi_t(x='right') = 0")
+    
+    problem.add_equation("dot(A_t, ey)(x='left')  = 0")
+    problem.add_equation("dot(A_t, ez)(x='left')  = 0")
+    problem.add_equation("dot(A_t, ey)(x='right') = 0")
+    problem.add_equation("dot(A_t, ez)(x='right') = 0")
 
-    problem.add_equation("dot(b_t, ex)(x='left')  = 0")
-    problem.add_equation("dot(b_t, ex)(x='right') = 0")
-    problem.add_equation("dot(dx(b_t), ex)(x='left')  = 0")
-    problem.add_equation("dot(dx(b_t), ex)(x='right') = 0")
+    # problem.add_equation("dot(b_t, ex)(x='left')  = 0")
+    # problem.add_equation("dot(b_t, ex)(x='right') = 0")
+    # problem.add_equation("dot(dx(b_t), ex)(x='left')  = 0")
+    # problem.add_equation("dot(dx(b_t), ex)(x='right') = 0")
 
     # problem.add_equation("phi_t(x='left')  = 0")
     # problem.add_equation("phi_t(x='right') = 0")
