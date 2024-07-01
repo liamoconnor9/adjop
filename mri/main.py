@@ -45,7 +45,7 @@ try:
     args = docopt(__doc__)
     filename = Path(args['<config_file>'])
 except:
-    filename = path + '/default.cfg'
+    filename = path + '/new_config.cfg'
 config = ConfigEval(filename)
 locals().update(config.execute_locals())
 logger.info('objective_overwrite = {}'.format(objective_overwrite))
@@ -54,13 +54,13 @@ if (not os.path.isdir(path + '/' + suffix)):
     sys.exit()
 
 doSBI = False
-if (args['<SBI_config>'] != None):
-    logger.info('SBI config provided. Overwriting default config for simple backward integration...')
-    SBI_config = Path(args['<SBI_config>'])
-    sbi_dict = config.SBI_dictionary(SBI_config)
-    doSBI = True
-    logger.info('Localizing SBI settings: {}'.format(sbi_dict))
-    locals().update(sbi_dict)
+# if (args['<SBI_config>'] != None):
+#     logger.info('SBI config provided. Overwriting default config for simple backward integration...')
+#     SBI_config = Path(args['<SBI_config>'])
+#     sbi_dict = config.SBI_dictionary(SBI_config)
+#     doSBI = True
+#     logger.info('Localizing SBI settings: {}'.format(sbi_dict))
+#     locals().update(sbi_dict)
 logger.info('doSBI = {}'.format(doSBI))
 
 # Simulation Parameters
@@ -122,20 +122,11 @@ phi_t = backward_problem.variables[1]
 u_t   = backward_problem.variables[2]
 A_t   = backward_problem.variables[3]
 
-# obj_t = backward_problem.variables[3]
-
 lagrangian_dict = {
-    p   : p_t,
-    phi : phi_t,
     u   : u_t,
     A   : A_t
 }
-
-# this is enumerated in terms of the above four variables as well as the variables in the forward and backward problems. We only need u and A to perform adjoint-looping, which is encoded in the binary list below.
-# these ``guests'' stay at the hotel, which holds the solution in memory in OptimizationContext.py
-guest_list = [0, 0, 1, 1]
-# guest_names = [list(lagrangian_dict.keys())[i].name for i in range(len(guest_list)) if guest_list[i]]
-guest_names = ["u", "A"]
+guest_names = [entity.name for entity in lagrangian_dict.keys()]
 
 forward_solver = forward_problem.build_solver(forward_timestepper)
 backward_solver = backward_problem.build_solver(backward_timestepper)
@@ -246,7 +237,7 @@ opt.opt_scales = opt_scales
 opt.add_handlers = add_handlers
 opt.handler_loop_cadence = handler_loop_cadence
 
-opt.init_layout(u)
+opt.init_layout(lagrangian_dict)
 
 opt._obj_coeff = obj_coeff
 if abber == 0:
@@ -423,56 +414,24 @@ elif (method == "check_grad"):
     method = opt.check_grad
     opt.set_euler_params(gamma_init, euler_safety)
 
-startTime = datetime.now()
-if (method == "fixedpt"):
-    # options = {'maxiter' : opt_iters, 'gtol' : tol}
-    for name in guest_names:
-        opt.ic[name].change_scales(opt_scales)
-    opt.jac_layout.change_scales(1)
-    opt.jac_layout['g'] = opt.ic['u']['g'].copy()
-    opt.jac_layout['c']
-    x0 = opt.jac_layout.allgather_data().flatten().copy()  # Initial guess.
-    print(x0.shape)
-    sys.exit()
-    CW.barrier()
-    logger.info('all procs entering optimization loop with # d.o.f. = {}'.format(np.shape(x0)))
-
-    def fixed_iter(x2):
-        opt.loop(x2.copy())
-        return x2 - 1e0*opt.jac(x2)
-
-    res1 = optimize.fixed_point(fixed_iter, x0)
-    logger.info('scipy message {}'.format(res1.message))
-
-if ("root" in suffix):
-    def jac_loop(x2):
-        opt.loop(x2.copy())
-        return -opt.jac(x2)
-    tol = 1e-14
-    opt.ic['u'].change_scales(opt_scales)
-    opt.jac_layout.change_scales(1)
-    opt.jac_layout['g'] = opt.ic['u']['g'].copy()
-    opt.jac_layout['c']
-    x0 = opt.jac_layout.allgather_data().flatten().copy()  # Initial guess.
-    CW.barrier()
-    logger.info('all procs entering optimization loop with # d.o.f. = {}'.format(np.shape(x0)))
-
-    # sys.exit()
-    res1 = optimize.root(jac_loop, x0, method=method, tol=tol)
-    logger.info('scipy message {}'.format(res1.message))
 try:
     tol = 1e-10
     options = {'maxiter' : opt_iters, 'gtol' : tol}
-    opt.ic['u'].change_scales(opt_scales)
-    opt.jac_layout.change_scales(1)
-    opt.jac_layout['g'] = opt.ic['u']['g'].copy()
-    opt.jac_layout['c']
-    x0 = opt.jac_layout.allgather_data().flatten().copy()  # Initial guess.
-    CW.barrier()
-    logger.info('all procs entering optimization loop with # d.o.f. = {}'.format(np.shape(x0)))
+    state_list = []
+    for i, name in enumerate(guest_names):
+        opt.ic[name].change_scales(opt_scales)
+        opt.jac_layout_list[i].change_scales(1)
+        opt.jac_layout_list[i]['g'] = opt.ic[name]['g'].copy()
+        opt.jac_layout_list[i]['c']
+        state_list = [field.allgather_data().flatten().copy() for field in opt.jac_layout_list] # Initial guess.
 
+    CW.barrier()
+    state = np.concatenate(np.array(state_list))
+    print(state.shape)
+    logger.info('all procs entering optimization loop with # d.o.f. = {}'.format(np.shape(state)))
+
+    res1 = optimize.minimize(opt.loop, state, jac=opt.jac, method=method, tol=tol, options=options)
     # sys.exit()
-    res1 = optimize.minimize(opt.loop, x0, jac=opt.jac, method=method, tol=tol, options=options)
     logger.info('scipy message {}'.format(res1.message))
 
 except opt.LoopIndexException as e:
@@ -485,12 +444,3 @@ logger.info('####################################################')
 logger.info('COMPLETED OPTIMIZATION RUN')
 logger.info('TOTAL TIME {}'.format(datetime.now() - startTime))
 logger.info('####################################################')
-sys.exit()
-
-if (True):
-    logger.info('doSBI = {}'.format(doSBI))
-    opt.ic['u'].change_scales(1)
-    x0 = opt.ic['u'].allgather_data(layout=opt.dist_layout).flatten().copy()
-    if (CW.rank == 0):
-        np.savetxt(path + '/' + suffix + '/SBI.txt', x0)
-    logger.info(path + '/' + suffix + '/SBI.txt')

@@ -3,6 +3,8 @@ import logging
 logger = logging.getLogger(__name__)
 from configparser import ConfigParser
 import dedalus.public as d3
+import os
+path = os.path.dirname(os.path.abspath(__file__))
 
 class ConfigEval(ConfigParser, dict):
 
@@ -66,7 +68,7 @@ class ConfigEval(ConfigParser, dict):
         # self.settings['nu'] = 1 / self.parse('Re')
         # self.settings['D'] = self.settings['nu'] / self.settings['Schmidt']
 
-    def __init__(self, filename, section='parameters', default='default.cfg'):
+    def __init__(self, filename, section='parameters', default=path + '/mri/default.cfg'):
         super().__init__()
         self.optionxform = str
         self.settings = {}

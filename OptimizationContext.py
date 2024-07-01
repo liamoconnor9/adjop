@@ -239,8 +239,8 @@ class OptimizationContext:
         self.old_grad.change_scales(scales)
         self.backward_solver.state[2].change_scales(scales)
         self.old_grad[layout] = self.backward_solver.state[2][layout].copy()
-
-        self.load_from_global_coeff_data(self.global_reshape(x))
+        self.load_from_global_coeff_data(x)
+        sys.exit()
         # self.jac_layout.change_scales(1)
         # self.jac_layout['c'] = self.global_reshape(x)[self.optcoeffslices]
         self.jac_layout.change_scales(round(1/scales))
