@@ -131,6 +131,12 @@ lagrangian_dict = {
     A   : A_t
 }
 
+# this is enumerated in terms of the above four variables as well as the variables in the forward and backward problems. We only need u and A to perform adjoint-looping, which is encoded in the binary list below.
+# these ``guests'' stay at the hotel, which holds the solution in memory in OptimizationContext.py
+guest_list = [0, 0, 1, 1]
+# guest_names = [list(lagrangian_dict.keys())[i].name for i in range(len(guest_list)) if guest_list[i]]
+guest_names = ["u", "A"]
+
 forward_solver = forward_problem.build_solver(forward_timestepper)
 backward_solver = backward_problem.build_solver(backward_timestepper)
 
@@ -294,6 +300,7 @@ ux = u @ ex
 # W = (dx(Uz) - dz(Ux)).evaluate()
 
 objectiveT = 0.5*d3.dot(u - U, u - U)
+objectiveT += 0.5*d3.dot(A - Alpha, A - Alpha)
 try:
     # specifying adjoint initial condition automatically
     opt.set_objectiveT(objectiveT)
@@ -309,6 +316,7 @@ except:
     opt.objectiveT = objectiveT
     opt.backward_ic = OrderedDict()
     opt.backward_ic['u_t'] = -(u - U)
+    opt.backward_ic['A_t'] = -(A - Alpha)
 
 # 'bar' quantities refer to the target initial condition (ubar is the minimizer we want to approximate)
 p_bar    = dist.Field(name='p_bar', bases=bases)
@@ -349,19 +357,14 @@ else:
     opt.build_tracker(tracker_dir, cadence)
 
 
-opt.add_metric('Rsqrd', True, 1, 0.5*d3.dot(opt.ic['u'] - u_bar, opt.ic['u'] - u_bar), integrate=True)
-opt.add_metric('omega_0', True, 1, 0.5*(d3.dot(d3.Curl(opt.ic['u'] - u_bar), d3.Curl(opt.ic['u'] - u_bar)))**2, integrate=True)
-# opt.add_metric('omega_0', True, 1, 0.5*((dx(opt.ic['u'] @ ez) - dz(opt.ic['u'] @ ex)) - wbar)**2, integrate=True)
-opt.add_metric('objective', False, 1, opt.objective, integrate=True)
-opt.add_metric('objectiveT', False, 1, opt.objectiveT, integrate=True)
-opt.add_metric('objectivet', False, 1, opt.objectivet, integrate=bool(abber))
-opt.add_metric('obj_approx', False, 1, 0.5*d3.dot(u_t, u_t), integrate=True)
+opt.add_metric('Rsqrd_u', True, 1, 0.5*d3.dot(opt.ic['u'] - u_bar, opt.ic['u'] - u_bar), integrate=True)
+opt.add_metric('Rsqrd_A', True, 1, 0.5*d3.dot(opt.ic['A'] - A_bar, opt.ic['A'] - A_bar), integrate=True)
+opt.add_metric('Rsqrd', True, 1, 0.5*d3.dot(opt.ic['A'] - A_bar, opt.ic['A'] - A_bar) + 0.5*d3.dot(opt.ic['u'] - u_bar, opt.ic['u'] - u_bar), integrate=True)
 
-proj_num = d3.Integrate(0.5*d3.dot(opt.ic['u'] - u_bar, u_t))
-proj_den = np.sqrt( d3.Integrate(opt.get_metric('Rsqrd').quantity) * d3.Integrate(opt.get_metric('obj_approx').quantity) )
-opt.add_metric('proj', False, 1, proj_num / proj_den, integrate=False)
+opt.add_metric('objectiveT', False, 1, opt.objectiveT, integrate=True)
 
 opt.add_metric('u_error', False, 1, 0.5*d3.dot(u - U, u - U), integrate=True)
+opt.add_metric('A_error', False, 1, 0.5*d3.dot(A - Alpha, A - Alpha), integrate=True)
 # opt.add_metric('s_error', False, 1, 0.5*(s - S)**2, integrate=True)
 # opt.add_metric('omega_error', False, 1, 0.5*(w - W)**2, integrate=True)
 opt.add_metric('time', False, 1, datetime.now)
@@ -377,7 +380,9 @@ if objective_overwrite != 'default':
 
 
 # loading state from existing run or from Simple Backward Integration (SBI)
-if (load_state):
+logger.info('skipping loading state')
+if (False):
+# if (load_state):
     try:
         try:
             write_fn = path + '/' + suffix + '/checkpoints/write{:06}.txt'.format(opt.loop_index)
@@ -393,11 +398,6 @@ if (load_state):
         opt.ic['u']['c'] = opt.reshape_soln(loadu, slices=slices, scales=1)
     except:
         logger.info('load state failed, using SBI or default')
-
-elif ('X' in suffix):
-    qrm200 = np.loadtxt(path + '/qrm200.txt').copy()
-    opt.ic['u'][opt_layout] = opt.reshape_soln(qrm200, slices=slices, scales=1)
-    logger.info('initial guess loaded from qrm200.txt')
     
 else:
 
@@ -426,11 +426,14 @@ elif (method == "check_grad"):
 startTime = datetime.now()
 if (method == "fixedpt"):
     # options = {'maxiter' : opt_iters, 'gtol' : tol}
-    opt.ic['u'].change_scales(opt_scales)
+    for name in guest_names:
+        opt.ic[name].change_scales(opt_scales)
     opt.jac_layout.change_scales(1)
     opt.jac_layout['g'] = opt.ic['u']['g'].copy()
     opt.jac_layout['c']
     x0 = opt.jac_layout.allgather_data().flatten().copy()  # Initial guess.
+    print(x0.shape)
+    sys.exit()
     CW.barrier()
     logger.info('all procs entering optimization loop with # d.o.f. = {}'.format(np.shape(x0)))
 

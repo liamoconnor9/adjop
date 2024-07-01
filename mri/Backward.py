@@ -33,7 +33,7 @@ def build_problem(domain, coords, params):
 
     # nccs
     U0 = dist.VectorField(coords, name='U0', bases=xbasis)
-    U0['g'][0] = params["S"] * x
+    U0['g'][0] = params["S"] * x * 0
 
     # B0 = 0
     # B0 = dist.VectorField(coords, name='B0', bases=xbasis)
