@@ -142,7 +142,7 @@ if (show):
     Features += (Plot2D,)
 logger.info('features = {}'.format(Features))
 
-class Optimization2D(*Features):
+class Optimization3D(*Features):
 
     def write_txt(self, tag='', scales=1):
         self.ic['u'].change_scales(scales)
@@ -229,7 +229,7 @@ class Optimization2D(*Features):
                 f.write(msg)
                 f.write('\n')
 
-opt = Optimization2D(domain, coords, forward_solver, backward_solver, lagrangian_dict, None, suffix)
+opt = Optimization3D(domain, coords, forward_solver, backward_solver, lagrangian_dict, None, suffix)
 opt.set_time_domain(T, num_cp, timestep)
 opt.opt_iters = opt_iters
 opt.opt_layout = opt_layout
@@ -240,8 +240,8 @@ opt.handler_loop_cadence = handler_loop_cadence
 opt.init_layout(lagrangian_dict)
 
 opt._obj_coeff = obj_coeff
-if abber == 0:
-    opt._jac_coeff = (Lx * Ly * Lz) / (Nx * Ny * Nz)
+# if abber == 0:
+#     opt._jac_coeff = (Lx * Ly * Lz) / (Nx * Ny * Nz)
 
 logger.info("opt._obj_coeff = {}".format(opt._obj_coeff))
 logger.info("opt.obj_coeff() = {}".format(opt.obj_coeff()))
@@ -414,6 +414,7 @@ elif (method == "check_grad"):
     method = opt.check_grad
     opt.set_euler_params(gamma_init, euler_safety)
 
+startTime = datetime.now()
 try:
     tol = 1e-10
     options = {'maxiter' : opt_iters, 'gtol' : tol}
