@@ -236,8 +236,7 @@ opt.opt_layout = opt_layout
 opt.opt_scales = opt_scales
 opt.add_handlers = add_handlers
 opt.handler_loop_cadence = handler_loop_cadence
-opt.opt_fields = [u]
-
+opt.opt_fields = [A]
 
 opt.init_layout(lagrangian_dict)
 
@@ -317,24 +316,20 @@ phi_bar  = dist.Field(name='phi_bar', bases=bases)
 u_bar    = dist.VectorField(coords, name='u_bar', bases=bases)
 A_bar    = dist.VectorField(coords, name='A_bar', bases=bases)
 
-# sbar = dist.Field(name='sbar', bases=bases)
-# ubar = dist.VectorField(coords, name='ubar', bases=bases)
-u_bar['g'][0] = 1/2 + 1/2 * (np.tanh((z-0.5)/0.1) - np.tanh((z+0.5)/0.1))
-# sbar['g'] = ubar['g'][0]
-u_bar['g'][1] += 0.1 * np.sin(2*np.pi*x/Lx) * np.exp(-(z-0.5)**2/0.01)
-u_bar['g'][1] += 0.1 * np.sin(2*np.pi*x/Lx) * np.exp(-(z+0.5)**2/0.01)
-# uc_data = clean_div(domain, coords, ubar['g'].copy())
-# # ubar.change_scales(1)
-# # ubar['g'] = uc_data.copy()
-# wbar = opt.wbar = (dx(ubar @ ez) - dz(ubar @ ex)).evaluate()
+u_bar['g'][1] = 1/2 + 1/2 * (np.tanh((z-0.5)/0.1) - np.tanh((z+0.5)/0.1))
+u_bar['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-0.5)**2/0.01)
+u_bar['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-1.5)**2/0.01)
+
+A_bar['g'][1] = 1/2 + 1/2 * (np.tanh((z-0.5)/0.1) - np.tanh((z+0.5)/0.1))
+A_bar['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-0.5)**2/0.01)
+A_bar['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-1.5)**2/0.01)
 
 
-# assume we are given the initial tracer distribution
-# opt.ic['s']['g'] = sbar['g'].copy()
-tracker_dir = path + '/' + suffix + '/tracker.pick'
+# uc_data = clean_div(domain, coords, u_bar['g'].copy())
+# Ac_data = clean_div(domain, coords, A_bar['g'].copy())
 
-# # cadence = opt_iters - 1
 cadence = show_loop_cadence
+tracker_dir = path + '/' + suffix + '/tracker.pick'
 if (load_state):
     try:
         opt.load_tracker(tracker_dir, 1, cadence)
@@ -401,6 +396,7 @@ else:
     except Exception as e:
         logger.info(e)
         logger.info('no SBI guess provided.')
+        opt.ic['u']['g'] = u_bar['g'].copy()
         if (guide_coeff > 0):
             logger.info('initializating optimization loop with guide coefficient {}'.format(guide_coeff))
             opt.ic['u']['c'] = guide_coeff*ubar['c'].copy()
