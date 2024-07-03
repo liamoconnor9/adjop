@@ -71,10 +71,21 @@ class Euler(OptimizationContext):
             self.step_init = False
         else:
             # https://en.wikipedia.org/wiki/Gradient_descent
-            grad_diff = self.new_grad - self.old_grad
-            x_diff = self.new_x - self.old_x
-            integ1 = d3.Integrate(x_diff * grad_diff).evaluate()
-            integ2 = d3.Integrate(grad_diff * grad_diff).evaluate()
+
+            
+            integ1 = 0
+            integ2 = 0
+            for jk in range(len(self.new_x)):
+                grad_diff = self.new_grad[jk] - self.old_grad[jk]
+                x_diff = self.new_x[jk] - self.old_x[jk]
+                integ1 += d3.Integrate(x_diff * grad_diff).evaluate()
+                integ2 += d3.Integrate(grad_diff * grad_diff).evaluate()
+            integ1 = integ1.evaluate()
+            integ2 = integ2.evaluate()  
+            # grad_diff = self.new_grad - self.old_grad
+            # x_diff = self.new_x - self.old_x
+            # integ1 = d3.Integrate(x_diff * grad_diff).evaluate()
+            # integ2 = d3.Integrate(grad_diff * grad_diff).evaluate()
 
             if (CW.rank == 0 or self.domain.dist.comm == MPI.COMM_SELF):
                 gamma = epsilon_safety * np.abs(integ1['g'].flat[0]) / (integ2['g'].flat[0])
@@ -90,7 +101,10 @@ class Euler(OptimizationContext):
         if (self.loop_index == 0):
             return np.nan
         else:
-            old_grad_sqrd_integ = d3.Integrate(self.old_grad * self.old_grad).evaluate()
+            old_grad_sqrd_integ = 0
+            for field in self.old_grad:
+                old_grad_sqrd_integ += d3.Integrate(field * field).evaluate()
+            old_grad_sqrd_integ = old_grad_sqrd_integ.evaluate()
             if (CW.rank == 0 or self.domain.dist.comm == MPI.COMM_SELF):
                 old_grad_sqrd = old_grad_sqrd_integ['g'].flat[0]
             else:

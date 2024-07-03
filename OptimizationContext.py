@@ -50,6 +50,7 @@ class OptimizationContext:
         self.ic = OrderedDict()
         for var in lagrangian_dict.keys():
             self.ic[var.name] = var.copy()
+            self.ic[var.name].name = var.name
         self.backward_ic = OrderedDict()
 
         self.loop_index = 0
@@ -85,20 +86,32 @@ class OptimizationContext:
         self.show_backward = False
         self.gamma_init = 0.01
 
-        self.new_x = forward_solver.state[2].copy()
-        self.new_grad = forward_solver.state[2].copy()
-        self.old_x = forward_solver.state[2].copy()
-        self.old_grad = forward_solver.state[2].copy()
+        self.new_x = []
+        self.new_grad = []
+        self.old_x = []
+        self.old_grad = []
 
-        self.new_x.name = "new_x"
-        self.new_grad.name = "new_grad"
-        self.old_x.name = "old_x"
-        self.old_grad.name = "old_grad"
-
-        self.new_x['g'] = 0.0
-        self.new_grad['g'] = 0.0
-        self.old_x['g'] = 0.0
-        self.old_grad['g'] = 0.0
+        try:
+            for field in self.forward_solver.state:
+                if field in self.opt_fields:
+                    self.new_x.append(field.copy())
+                    self.new_grad.append(field.copy())
+                    self.old_x.append(field.copy())
+                    self.old_grad.append(field.copy())
+                    self.new_x[-1].name = field.name
+                    self.new_grad[-1].name = field.name
+                    self.old_x[-1].name = field.name
+                    self.old_grad[-1].name = field.name
+        except:
+            for field in self.lagrangian_dict.keys():
+                self.new_x.append(field.copy())
+                self.new_grad.append(field.copy())
+                self.old_x.append(field.copy())
+                self.old_grad.append(field.copy())
+                self.new_x[-1].name = field.name
+                self.new_grad[-1].name = field.name
+                self.old_x[-1].name = field.name
+                self.old_grad[-1].name = field.name
 
 
         self.hotel_layout='c'
@@ -220,6 +233,23 @@ class OptimizationContext:
         jac_coeff = self.jac_coeff()
         return self.fprimejl * jac_coeff
 
+    def set_scales_internal(self, scales=1):
+        for y in self.new_x:
+            y.change_scales(scales)
+        for y in self.old_x:
+            y.change_scales(scales)
+        for y in self.new_grad:
+            y.change_scales(scales)
+        for y in self.old_grad:
+            y.change_scales(scales)
+        for y in self.forward_solver.state:
+            y.change_scales(scales)
+        for y in self.backward_solver.state:
+            y.change_scales(scales)
+        for y in self.ic.values():
+            y.change_scales(scales)
+
+
     def loop_forward(self, x):
 
         if (not self.preallocate):
@@ -230,33 +260,46 @@ class OptimizationContext:
         
         scales = self.opt_scales
         layout = self.opt_layout
+        
         self.x = x
-        self.ic['u'].change_scales(scales)
-        self.old_x.change_scales(scales)
-        self.new_x.change_scales(scales)
+        for value in self.ic.values():
+            value.change_scales(scales)
+
+        self.set_scales_internal(scales)    
 
         # Grab before fields are evolved (old state)
-        self.old_grad.change_scales(scales)
-        self.backward_solver.state[2].change_scales(scales)
-        self.old_grad[layout] = self.backward_solver.state[2][layout].copy()
-        self.load_from_global_coeff_data(x)
-        sys.exit()
-        # self.jac_layout.change_scales(1)
-        # self.jac_layout['c'] = self.global_reshape(x)[self.optcoeffslices]
-        self.jac_layout.change_scales(round(1/scales))
-        self.ic['u'].change_scales(1)
-        self.ic['u'][layout] = self.reshape_soln(x)
-        # self.ic['u']['g'] = self.jac_layout['g'].copy()
-        # xsim = self.jac_layout.allgather_data().flatten().copy()
-        # self.ic['u'][layout] = self.reshape_soln(xsim)
+        for grad_field in self.old_grad:
+            for sim_field in self.backward_solver.state:
+                if grad_field.name == sim_field.name:
+                    grad_field[layout] = sim_field[layout].copy()
 
-        self.old_x[layout] = self.new_x[layout].copy()
-        self.new_x[layout] = self.ic['u'][layout].copy()
+        self.load_from_global_coeff_data(x)
+
+        for jac_field in self.jac_layout_list:
+            for ic_field in self.ic.values():
+                if jac_field.name == ic_field.name:
+                    jac_field.change_scales(round(1/scales))
+                    ic_field[layout] = jac_field[layout].copy()
+
+        for new_field in self.new_x:
+            for old_field in self.old_x:
+                if new_field.name == ic_field.name:
+                    old_field[layout] = new_field[layout].copy()
+                    
+
+        for new_field in self.new_x:
+            for ic_field in self.ic.values():
+                if new_field.name == ic_field.name:
+                    new_field[layout] = ic_field[layout].copy()
+        # for ic in self.jac_layout_list:
+        #     print(ic.name)
+        # sys.exit()
+        # self.new_x[layout] = self.ic['u'][layout].copy()
         self.set_forward_ic()
         self.before_fullforward_solve()
         self.solve_forward_full()
-        self.forward_solver.state[2].change_scales(1)
-        self.uT = self.forward_solver.state[2]['g'].copy()
+        # self.forward_solver.state[2].change_scales(1)
+        # self.uT = self.forward_solver.state[2]['g'].copy()
         
         self.evaluate_stateT()
         self.after_fullforward_solve()
@@ -288,15 +331,24 @@ class OptimizationContext:
         layout = self.opt_layout
         # self.backward_solver.state[0][layout]
 
-        self.old_grad.change_scales(1)
-        self.new_grad.change_scales(1)
+        self.set_scales_internal(1)
 
-        self.old_grad[layout] = self.new_grad[layout].copy()
-        self.new_grad[layout] = self.backward_solver.state[2][layout].copy()
+        for new_field in self.new_grad:
+            for old_field in self.old_grad:
+                if new_field.name == old_field.name:
+                    old_field[layout] = new_field[layout].copy()
 
-        self.old_grad.change_scales(scales)
-        self.new_grad.change_scales(scales)
+        for grad_field in self.new_grad:
+            for sim_field in self.backward_solver.state:
+                if grad_field.name + '_t' == sim_field.name:
+                    grad_field[layout] = sim_field[layout].copy()
 
+        for jac_field in self.jac_layout_list:
+            for sim_field in self.backward_solver.state:
+                if jac_field.name + '_t' == sim_field.name:
+                    jac_field[layout] = -1e0*sim_field[layout].copy()
+
+        self.set_scales_internal(scales)
         self.evaluate_state0()
 
         obj = 0.0
@@ -313,22 +365,29 @@ class OptimizationContext:
 
         self.after_backward_solve()
         self.loop_index += 1
-        
-        self.backward_solver.state[2].change_layout(layout)
-        data = -1e0*self.backward_solver.state[2].allgather_data()
+        # self.backward_solver.state[2].change_layout(layout)
+
+        data = []
+        for field in self.jac_layout_list:
+            field.change_scales(scales)
+            field[layout]
+            data.append(field.allgather_data().flatten().copy())
+        data = 1e0*np.concatenate(np.array(data))
         self.fprime = data.flatten().copy()
 
-        self.backward_solver.state[2].change_layout('g')
-        self.backward_solver.state[2].change_scales(scales)
-        self.jac_layout.change_scales(1)
+        # self.backward_solver.state[2].change_layout('g')
+        # self.backward_solver.state[2].change_scales(scales)
+        # self.jac_layout.change_scales(1)
         # logger.info('changing opt scales post-loop to scales = {}'.format(scales))
         # datag = -1e0*self.backward_solver.state[2].allgather_data()
-        self.jac_layout['g'] = -1e0*self.backward_solver.state[2]['g'].copy()
+        # self.jac_layout['g'] = -1e0*self.backward_solver.state[2]['g'].copy()
         # if (self.skew_gradgrad):
         #     w0 = d3.skew()
-        self.jac_layout.change_scales(1)
-        self.jac_layout.change_layout(layout)
-        self.fprimejl = self.jac_layout.allgather_data().flatten().copy()
+
+        # self.jac_layout.change_scales(1)
+        # self.jac_layout.change_layout(layout)
+        self.fprimejl = self.fprime.copy()
+
         # logger.info('fprime shape = {}'.format(np.shape(self.fprime)))
         # logger.info('fprimejl shape = {}'.format(np.shape(self.fprimejl)))
         return self.fprime
@@ -479,7 +538,10 @@ class OptimizationContext:
         return
 
     def evaluate_state0(self):
-        new_grad_sqrd_integ = d3.Integrate(self.new_grad * self.new_grad).evaluate()
+        new_grad_sqrd_integ = 0
+        for field in self.new_grad:
+            new_grad_sqrd_integ += d3.Integrate(field**2).evaluate()
+        # new_grad_sqrd_integ = d3.Integrate(self.new_grad * self.new_grad).evaluate()
         if (CW.rank == 0 or self.domain.dist.comm == MPI.COMM_SELF):
             new_grad_sqrd = new_grad_sqrd_integ['g'].flat[0]
         else:

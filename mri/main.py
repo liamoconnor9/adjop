@@ -236,6 +236,8 @@ opt.opt_layout = opt_layout
 opt.opt_scales = opt_scales
 opt.add_handlers = add_handlers
 opt.handler_loop_cadence = handler_loop_cadence
+opt.opt_fields = [u]
+
 
 opt.init_layout(lagrangian_dict)
 
