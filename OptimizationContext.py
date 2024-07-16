@@ -542,6 +542,7 @@ class OptimizationContext:
         for field in self.new_grad:
             new_grad_sqrd_integ += d3.Integrate(field**2).evaluate()
         # new_grad_sqrd_integ = d3.Integrate(self.new_grad * self.new_grad).evaluate()
+        new_grad_sqrd_integ = new_grad_sqrd_integ.evaluate()
         if (CW.rank == 0 or self.domain.dist.comm == MPI.COMM_SELF):
             new_grad_sqrd = new_grad_sqrd_integ['g'].flat[0]
         else:

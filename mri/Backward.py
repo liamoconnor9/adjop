@@ -123,7 +123,7 @@ def build_problem(domain, coords, params):
 # 0 = -\nabla\tilde{\phi} + \mathbf{\tilde{A}}\times(\nabla\times\mathbf{A})-\partial_t\mathbf{\tilde{A}} -\nabla\times(\mathbf{\tilde{A}}\times \mathbf{u}) - \nabla\times\left( \mathbf{\tilde{u}}\times(\nabla\times\nabla\times\mathbf{A})\right) - \nabla^2\left( (\nabla\times\mathbf{A}) \times \mathbf{\tilde{u}}  \right) - \nu\nabla^2\mathbf{\tilde{A}}
 
     IND_LHS = -dt(A_t) - d3.grad(phi_t) - nu*d3.div(grad_A_t) + lift(tau2A_t,-1) 
-    IND_RHS = -d3.cross(A_t, d3.curl(A)) + d3.curl(d3.cross(A_t, u)) + d3.curl(d3.cross(u_t, d3.curl(d3.curl(A)))) + d3.div(d3.grad(d3.cross((d3.curl(A)), u_t)))
+    IND_RHS = d3.curl(d3.cross(A_t, u)) + d3.curl(d3.cross(u_t, d3.curl(d3.curl(A)))) + d3.div(d3.grad(d3.cross(d3.curl(A), u_t)))
     problem = d3.IVP([p_t, phi_t, u_t, A_t, taup_t, tau1u_t, tau2u_t, tau1A_t, tau2A_t], namespace=locals())
     problem.add_equation((DIVU_LHS, DIVU_RHS))
     problem.add_equation((DIVA_LHS, DIVA_RHS))
