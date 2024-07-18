@@ -49,9 +49,19 @@ class JacLayout(OptimizationContext):
         self.shape_list = []
         for input in lagrangian_dict.keys():
             self.jac_layout_list.append(d3.Field(dist, bases=newbases, name=input.name, tensorsig=input.tensorsig, dtype=input.dtype))
+
             self.temp_list.append(d3.Field(dist, bases=newbases, name="temp_" + input.name, tensorsig=input.tensorsig, dtype=input.dtype))
-            self.shape_list.append(input[self.opt_layout].shape)
+
+            input[self.opt_layout]
+            dom_global_shape = input.global_shape
+            if len(input.tensorsig) > 0:
+                dom_global_shape = (input.tensorsig[0].dim, ) + dom_global_shape
+
+            self.shape_list.append(dom_global_shape)
+            # self.shape_list.append(input[self.opt_layout].shape)
         # print(self.)
+        # print(self.shape_list)
+        # sys.exit()
 
     def full_coeff(self, input):
         input.change_scales(1)
@@ -72,12 +82,16 @@ class JacLayout(OptimizationContext):
 
         # print(np.shape(array))
         # print(3 *  math.prod(self.optdistshape))
-        # sys.exit()
+        sys.exit()
         # return np.reshape(array, (3,) + self.optdistshape)
         # self.jac_layout['c'] = narray.copy()
 
     def load_from_global_coeff_data(self, input, pre_slices=tuple()):
+
+        # for rshpd in self.shape_list:
+        #     print('shape = {}'.format(np.shape(rshpd)))
         reshaped_list = self.global_reshape(input)
+        # sys.exit()
         # print(len(reshaped_list))
         # print(np.shape(reshaped_list[0]))
         # sys.exit()

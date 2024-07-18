@@ -426,11 +426,9 @@ try:
 
     CW.barrier()
     state = np.concatenate(np.array(state_list))
-    print(state.shape)
     logger.info('all procs entering optimization loop with # d.o.f. = {}'.format(np.shape(state)))
 
     res1 = optimize.minimize(opt.loop, state, jac=opt.jac, method=method, tol=tol, options=options)
-    # sys.exit()
     logger.info('scipy message {}'.format(res1.message))
 
 except opt.LoopIndexException as e:

@@ -273,6 +273,7 @@ class OptimizationContext:
                 if grad_field.name == sim_field.name:
                     grad_field[layout] = sim_field[layout].copy()
 
+        # sys.exit()
         self.load_from_global_coeff_data(x)
 
         for jac_field in self.jac_layout_list:
@@ -291,9 +292,7 @@ class OptimizationContext:
             for ic_field in self.ic.values():
                 if new_field.name == ic_field.name:
                     new_field[layout] = ic_field[layout].copy()
-        # for ic in self.jac_layout_list:
-        #     print(ic.name)
-        # sys.exit()
+                    
         # self.new_x[layout] = self.ic['u'][layout].copy()
         self.set_forward_ic()
         self.before_fullforward_solve()
