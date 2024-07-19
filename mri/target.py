@@ -112,38 +112,39 @@ solver.stop_sim_time = T
 # Match tracer to shear
 # s['g'] = 1/2 + 1/2 * (np.tanh((z-0.5)/0.1) - np.tanh((z+0.5)/0.1))
 
-print([field.name for field in solver.state])
+# print([field.name for field in solver.state])
 for field in solver.state:
     locals()[field.name] = field
     # eval("{} = field".format(field.name))
-# sys.exit()
 
-if (loadic and not "ubar" in str(ic_file)):
-    
-    ic_raw = np.loadtxt(ic_file).copy()
-    slices = dist.layout_references[opt_layout].slices(domain, scales=opt_scales)
-    opt_scales = int((len(ic_raw) / (2*Nx*Nz))**0.5)
-    u.change_scales(opt_scales)
+if sp_sim_dt != 0 :
+    # fh_mode = 'overwrite'
+    slicepoints = solver.evaluator.add_file_handler(path + '/data/' + str(seed) + '/slicepoints', sim_dt=sp_sim_dt, max_writes=50, mode=fh_mode)
+    for field, field_name in [(b, 'b'), ((u), 'v'), (d3.curl(b), 'j')]:
+        for d2, unit_vec in zip(('x', 'y', 'z'), (ex, ey, ez)):
+            slicepoints.add_task(d3.dot(field, unit_vec)(x = 'center'), name = "{}{}_mid{}".format(field_name, d2, 'x'))
+            slicepoints.add_task(d3.dot(field, unit_vec)(y = 'center'), name = "{}{}_mid{}".format(field_name, d2, 'y'))
+            slicepoints.add_task(d3.dot(field, unit_vec)(z = 'center'), name = "{}{}_mid{}".format(field_name, d2, 'z'))
+            
+            slicepoints.add_task(d3.Integrate(d3.dot(field, unit_vec), 'x'), name = "{}{}_avg{}".format(field_name, d2, 'x'))
+            slicepoints.add_task(d3.Integrate(d3.dot(field, unit_vec), 'y'), name = "{}{}_avg{}".format(field_name, d2, 'y'))
+            slicepoints.add_task(d3.Integrate(d3.dot(field, unit_vec), 'z'), name = "{}{}_avg{}".format(field_name, d2, 'z'))
+                
+        slicepoints.add_task(d3.Integrate(d3.Integrate(d3.dot(field, ey), 'y'), 'z') / Ly / Lz, name = "{}{}_avg".format(field_name, 'y'))
+        slicepoints.add_task(d3.Integrate(d3.Integrate(d3.dot(field, ez), 'y'), 'z') / Ly / Lz, name = "{}{}_avg".format(field_name, 'z'))
 
-    if opt_layout == 'c':
-        # nshape = domain.coeff_shape
-        nshape = (domain.coeff_shape[0] * opt_scales, domain.coeff_shape[1] * opt_scales)
-        udata = ic_raw.reshape((2,) + nshape)[:, slices[0], slices[1]]
-    else:
-        udata = ic_raw.reshape((2,) + domain.grid_shape(scales=opt_scales))[:, slices[0], slices[1]]
+logger.info('constructing initial condition')
+u['g'][1] = 1/2 + 1/2 * (np.tanh((z-Lz/4)/0.1) - np.tanh((z-3*Lz/4)/0.1))
+u['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-Lz/4)**2/0.01)
+u['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-3*Lz/4)**2/0.01)
 
-    u[opt_layout] = udata.copy()
-    logger.info('Successfully populated initial condition from write file.')
-else:
-    logger.info('constructing initial condition')
+A['g'][1] = 1/200 * (np.tanh((z-Lz/4)/0.1) - np.tanh((z-3*Lz/4)/0.1))
+A['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-Lz/4)**2/0.01)
+A['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-3*Lz/4)**2/0.01)
 
-    u['g'][1] = 1/2 + 1/2 * (np.tanh((z-0.5)/0.1) - np.tanh((z+0.5)/0.1))
-    u['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-0.5)**2/0.01)
-    u['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-1.5)**2/0.01)
-    
-    A['g'][1] = 1/2 + 1/2 * (np.tanh((z-0.5)/0.1) - np.tanh((z+0.5)/0.1))
-    A['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-0.5)**2/0.01)
-    A['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-1.5)**2/0.01)
+# A['g'][1] = 1/200 * (np.tanh((z-0.5)/0.1) - np.tanh((z+0.5)/0.1))
+# A['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-0.5)**2/0.01)
+# A['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-1.5)**2/0.01)
 
     # uc_data = clean_div(domain, coords, u['g'].copy())
     # u.change_scales(1)
@@ -160,6 +161,21 @@ else:
     checkpoints.add_task(b, name='b', layout='g')
     checkpoints.add_tasks(solver.state, layout='g')
 
+slicepoints = solver.evaluator.add_file_handler(path + '/data/' + str(seed) + '/slicepoints', sim_dt=sp_sim_dt, max_writes=50, mode=fh_mode)
+for field, field_name in [(b, 'b'), ((u), 'v'), (d3.curl(b), 'j')]:
+    for d2, unit_vec in zip(('x', 'y', 'z'), (ex, ey, ez)):
+        slicepoints.add_task(d3.dot(field, unit_vec)(x = 'center'), name = "{}{}_mid{}".format(field_name, d2, 'x'))
+        slicepoints.add_task(d3.dot(field, unit_vec)(y = 'center'), name = "{}{}_mid{}".format(field_name, d2, 'y'))
+        slicepoints.add_task(d3.dot(field, unit_vec)(z = 'center'), name = "{}{}_mid{}".format(field_name, d2, 'z'))
+        
+        slicepoints.add_task(d3.Integrate(d3.dot(field, unit_vec), 'x'), name = "{}{}_avg{}".format(field_name, d2, 'x'))
+        slicepoints.add_task(d3.Integrate(d3.dot(field, unit_vec), 'y'), name = "{}{}_avg{}".format(field_name, d2, 'y'))
+        slicepoints.add_task(d3.Integrate(d3.dot(field, unit_vec), 'z'), name = "{}{}_avg{}".format(field_name, d2, 'z'))
+            
+    slicepoints.add_task(d3.Integrate(d3.Integrate(d3.dot(field, ey), 'y'), 'z') / Ly / Lz, name = "{}{}_avg".format(field_name, 'y'))
+    slicepoints.add_task(d3.Integrate(d3.Integrate(d3.dot(field, ez), 'y'), 'z') / Ly / Lz, name = "{}{}_avg".format(field_name, 'z'))
+
+
 # CFL
 CFL = d3.CFL(solver, initial_dt=max_timestep, cadence=10, safety=0.2, threshold=0.1,
              max_change=1.5, min_change=0.5, max_dt=max_timestep)
@@ -167,7 +183,8 @@ CFL.add_velocity(u)
 
 # Flow properties
 flow = d3.GlobalFlowProperty(solver, cadence=1)
-# flow.add_property((u@ez)**2, name='w2')
+flow.add_property((u@u), name='KE')
+flow.add_property((b@b), name='BE')
 
 # Main loop
 solver.start_time = 0.0
@@ -177,8 +194,10 @@ try:
     logger.info('Starting main loop')
     while solver.proceed:
         solver.step(timestep)
-        if (solver.iteration-1) % 1000 == 0 or solver.iteration < 5:
-            logger.info('Iteration=%i, Time=%e, dt=%e' %(solver.iteration, solver.sim_time, timestep))
+        if (solver.iteration-1) % 10 == 0 or solver.iteration < 5:
+            max_KE = flow.max('KE')
+            max_BE = flow.max('BE')
+            logger.info('Iteration={}, Time={}, dt={}, max_KE={}, max_BE={}'.format(solver.iteration, solver.sim_time, timestep, max_KE, max_BE))
     solver.step(timestep)
 except Exception as e:
     print(e)

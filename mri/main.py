@@ -112,15 +112,21 @@ backward_problem = Backward.build_problem(domain, coords, backward_params)
 logger.info('success')
 
 # forward, and corresponding adjoint variables (fields)
-p   = forward_problem.variables[1]
-phi = forward_problem.variables[1]
-u   = forward_problem.variables[2]
-A   = forward_problem.variables[3]
+# p   = forward_problem.variables[1]
+# phi = forward_problem.variables[1]
+# u   = forward_problem.variables[2]
+# A   = forward_problem.variables[3]
 
-p_t   = backward_problem.variables[1]
-phi_t = backward_problem.variables[1]
-u_t   = backward_problem.variables[2]
-A_t   = backward_problem.variables[3]
+for field in forward_problem.variables:
+    locals()[field.name] = field
+
+for field in backward_problem.variables:
+    locals()[field.name] = field
+
+# p_t   = backward_problem.variables[1]
+# phi_t = backward_problem.variables[1]
+# u_t   = backward_problem.variables[2]
+# A_t   = backward_problem.variables[3]
 
 lagrangian_dict = {
     u   : u_t,
@@ -236,7 +242,7 @@ opt.opt_layout = opt_layout
 opt.opt_scales = opt_scales
 opt.add_handlers = add_handlers
 opt.handler_loop_cadence = handler_loop_cadence
-opt.opt_fields = [A]
+opt.opt_fields = [u, A]
 
 opt.init_layout(lagrangian_dict)
 
@@ -316,14 +322,12 @@ phi_bar  = dist.Field(name='phi_bar', bases=bases)
 u_bar    = dist.VectorField(coords, name='u_bar', bases=bases)
 A_bar    = dist.VectorField(coords, name='A_bar', bases=bases)
 
-u_bar['g'][1] = 1/2 + 1/2 * (np.tanh((z-0.5)/0.1) - np.tanh((z+0.5)/0.1))
-u_bar['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-0.5)**2/0.01)
-u_bar['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-1.5)**2/0.01)
-
-A_bar['g'][1] = 1/2 + 1/2 * (np.tanh((z-0.5)/0.1) - np.tanh((z+0.5)/0.1))
-A_bar['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-0.5)**2/0.01)
-A_bar['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-1.5)**2/0.01)
-
+u_bar['g'][1] = 1/2 + 1/2 * (np.tanh((z-Lz/4)/0.1) - np.tanh((z-3*Lz/4)/0.1))
+u_bar['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-Lz/4)**2/0.01)
+u_bar['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-3*Lz/4)**2/0.01)
+A_bar['g'][1] = 1/200 * (np.tanh((z-Lz/4)/0.1) - np.tanh((z-3*Lz/4)/0.1))
+A_bar['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-Lz/4)**2/0.01)
+A_bar['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-3*Lz/4)**2/0.01)
 
 # uc_data = clean_div(domain, coords, u_bar['g'].copy())
 # Ac_data = clean_div(domain, coords, A_bar['g'].copy())
@@ -396,7 +400,7 @@ else:
     except Exception as e:
         logger.info(e)
         logger.info('no SBI guess provided.')
-        opt.ic['u']['g'] = u_bar['g'].copy()
+        # opt.ic['u']['g'] = u_bar['g'].copy()
         if (guide_coeff > 0):
             logger.info('initializating optimization loop with guide coefficient {}'.format(guide_coeff))
             opt.ic['u']['c'] = guide_coeff*ubar['c'].copy()
