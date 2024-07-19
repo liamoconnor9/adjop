@@ -116,10 +116,28 @@ solver.stop_sim_time = T
 for field in solver.state:
     locals()[field.name] = field
     # eval("{} = field".format(field.name))
+fh_mode = 'overwrite'
+
+logger.info('constructing initial condition')
+u['g'][1] = (x-0.5)*(x+0.5)*(1/2 + 1/2 * (np.tanh((z-Lz/4)/0.1) - np.tanh((z-3*Lz/4)/0.1)))
+u['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-Lz/4)**2/0.01)
+u['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-3*Lz/4)**2/0.01)
+
+A['g'][1] = (x-0.5)*(x+0.5)/10 * (np.tanh((z-Lz/4)/0.1) - np.tanh((z-3*Lz/4)/0.1))
+A['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-Lz/4)**2/0.01)
+A['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-3*Lz/4)**2/0.01)
+
+# A['g'][1] = 1/200 * (np.tanh((z-0.5)/0.1) - np.tanh((z+0.5)/0.1))
+# A['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-0.5)**2/0.01)
+# A['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-1.5)**2/0.01)
+
+    # uc_data = clean_div(domain, coords, u['g'].copy())
+    # u.change_scales(1)
+    # u['g'] = uc_data.copy()
 
 if sp_sim_dt != 0 :
     # fh_mode = 'overwrite'
-    slicepoints = solver.evaluator.add_file_handler(path + '/data/' + str(seed) + '/slicepoints', sim_dt=sp_sim_dt, max_writes=50, mode=fh_mode)
+    slicepoints = solver.evaluator.add_file_handler(path + '/' + suffix + '/' + 'slicepoints_' + label, sim_dt=sp_sim_dt, max_writes=50, mode=fh_mode)
     for field, field_name in [(b, 'b'), ((u), 'v'), (d3.curl(b), 'j')]:
         for d2, unit_vec in zip(('x', 'y', 'z'), (ex, ey, ez)):
             slicepoints.add_task(d3.dot(field, unit_vec)(x = 'center'), name = "{}{}_mid{}".format(field_name, d2, 'x'))
@@ -133,23 +151,6 @@ if sp_sim_dt != 0 :
         slicepoints.add_task(d3.Integrate(d3.Integrate(d3.dot(field, ey), 'y'), 'z') / Ly / Lz, name = "{}{}_avg".format(field_name, 'y'))
         slicepoints.add_task(d3.Integrate(d3.Integrate(d3.dot(field, ez), 'y'), 'z') / Ly / Lz, name = "{}{}_avg".format(field_name, 'z'))
 
-logger.info('constructing initial condition')
-u['g'][1] = 1/2 + 1/2 * (np.tanh((z-Lz/4)/0.1) - np.tanh((z-3*Lz/4)/0.1))
-u['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-Lz/4)**2/0.01)
-u['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-3*Lz/4)**2/0.01)
-
-A['g'][1] = 1/200 * (np.tanh((z-Lz/4)/0.1) - np.tanh((z-3*Lz/4)/0.1))
-A['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-Lz/4)**2/0.01)
-A['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-3*Lz/4)**2/0.01)
-
-# A['g'][1] = 1/200 * (np.tanh((z-0.5)/0.1) - np.tanh((z+0.5)/0.1))
-# A['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-0.5)**2/0.01)
-# A['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-1.5)**2/0.01)
-
-    # uc_data = clean_div(domain, coords, u['g'].copy())
-    # u.change_scales(1)
-    # u['g'] = uc_data.copy()
-
 if (loadic):
     checkpoints = solver.evaluator.add_file_handler(icstr[:-4] + '_checkpoint', max_writes=100, sim_dt=0.1, mode='overwrite')
     checkpoints.add_tasks(solver.state, layout='g')
@@ -160,21 +161,6 @@ else:
     checkpoints = solver.evaluator.add_file_handler(path + '/' + suffix + '/checkpoint_{}'.format(label), max_writes=2, sim_dt=T, mode='overwrite')
     checkpoints.add_task(b, name='b', layout='g')
     checkpoints.add_tasks(solver.state, layout='g')
-
-slicepoints = solver.evaluator.add_file_handler(path + '/data/' + str(seed) + '/slicepoints', sim_dt=sp_sim_dt, max_writes=50, mode=fh_mode)
-for field, field_name in [(b, 'b'), ((u), 'v'), (d3.curl(b), 'j')]:
-    for d2, unit_vec in zip(('x', 'y', 'z'), (ex, ey, ez)):
-        slicepoints.add_task(d3.dot(field, unit_vec)(x = 'center'), name = "{}{}_mid{}".format(field_name, d2, 'x'))
-        slicepoints.add_task(d3.dot(field, unit_vec)(y = 'center'), name = "{}{}_mid{}".format(field_name, d2, 'y'))
-        slicepoints.add_task(d3.dot(field, unit_vec)(z = 'center'), name = "{}{}_mid{}".format(field_name, d2, 'z'))
-        
-        slicepoints.add_task(d3.Integrate(d3.dot(field, unit_vec), 'x'), name = "{}{}_avg{}".format(field_name, d2, 'x'))
-        slicepoints.add_task(d3.Integrate(d3.dot(field, unit_vec), 'y'), name = "{}{}_avg{}".format(field_name, d2, 'y'))
-        slicepoints.add_task(d3.Integrate(d3.dot(field, unit_vec), 'z'), name = "{}{}_avg{}".format(field_name, d2, 'z'))
-            
-    slicepoints.add_task(d3.Integrate(d3.Integrate(d3.dot(field, ey), 'y'), 'z') / Ly / Lz, name = "{}{}_avg".format(field_name, 'y'))
-    slicepoints.add_task(d3.Integrate(d3.Integrate(d3.dot(field, ez), 'y'), 'z') / Ly / Lz, name = "{}{}_avg".format(field_name, 'z'))
-
 
 # CFL
 CFL = d3.CFL(solver, initial_dt=max_timestep, cadence=10, safety=0.2, threshold=0.1,

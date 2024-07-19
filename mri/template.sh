@@ -90,7 +90,7 @@ else
     fi
 fi
 echo "done"
-exit 1
+# exit 1
 if [[ "$skip_sbi" == "True" ]] || [[ "$skip_sbi" == "1" ]]; then
     echo "SKIPPING SIMPLE BACKWARD INTEGRATION (SBI) ..."
 elif $skip_sbi_overwrite; then

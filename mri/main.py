@@ -122,7 +122,7 @@ for field in forward_problem.variables:
 
 for field in backward_problem.variables:
     locals()[field.name] = field
-
+b = d3.Curl(A)
 # p_t   = backward_problem.variables[1]
 # phi_t = backward_problem.variables[1]
 # u_t   = backward_problem.variables[2]
@@ -189,23 +189,24 @@ class Optimization3D(*Features):
         return loop_message
 
     def before_fullforward_solve(self):
-        if ('benchmark' in suffix):
-            global Nz
-            self.write_txt(tag='N{}_'.format(Nz), scales=1)
-            if (Nz == 1024):
-                self.ic['u'].change_scales(0.5)
-                self.write_txt(tag='N512_')
-                self.ic['u'].change_scales(0.25)
-                self.write_txt(tag='N256_')
-                self.ic['u'].change_scales(1)
-            elif (Nz == 512):
-                self.ic['u'].change_scales(0.5)
-                self.write_txt(tag='N256_')
-                self.ic['u'].change_scales(1)
+        self.write_txt()
+        if sp_sim_dt != 0 :
+            # fh_mode = 'overwrite'
+            slicepoints = forward_solver.evaluator.add_file_handler(path + '/' + suffix + '/' + 'slicepoints_' + str(opt.loop_index), sim_dt=sp_sim_dt, max_writes=300, mode="overwrite")
+            for field, field_name in [(b, 'b'), ((u), 'v'), (d3.curl(b), 'j')]:
+                for d2, unit_vec in zip(('x', 'y', 'z'), (ex, ey, ez)):
+                    slicepoints.add_task(d3.dot(field, unit_vec)(x = 'center'), name = "{}{}_mid{}".format(field_name, d2, 'x'))
+                    slicepoints.add_task(d3.dot(field, unit_vec)(y = 'center'), name = "{}{}_mid{}".format(field_name, d2, 'y'))
+                    slicepoints.add_task(d3.dot(field, unit_vec)(z = 'center'), name = "{}{}_mid{}".format(field_name, d2, 'z'))
+                    
+                    slicepoints.add_task(d3.Integrate(d3.dot(field, unit_vec), 'x'), name = "{}{}_avg{}".format(field_name, d2, 'x'))
+                    slicepoints.add_task(d3.Integrate(d3.dot(field, unit_vec), 'y'), name = "{}{}_avg{}".format(field_name, d2, 'y'))
+                    slicepoints.add_task(d3.Integrate(d3.dot(field, unit_vec), 'z'), name = "{}{}_avg{}".format(field_name, d2, 'z'))
+                        
+                slicepoints.add_task(d3.Integrate(d3.Integrate(d3.dot(field, ey), 'y'), 'z') / Ly / Lz, name = "{}{}_avg".format(field_name, 'y'))
+                slicepoints.add_task(d3.Integrate(d3.Integrate(d3.dot(field, ez), 'y'), 'z') / Ly / Lz, name = "{}{}_avg".format(field_name, 'z'))
 
-        else:
-            self.write_txt()
-            
+
         for Feature in Features:
             Feature.before_fullforward_solve(self)
 
