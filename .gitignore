@@ -3,3 +3,4 @@
 *.png
 *.tar.gz
 *__pycache__*
+*.pick

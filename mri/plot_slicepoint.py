@@ -180,14 +180,15 @@ if __name__ == "__main__":
         last_index = len(slicepoints)
 
         # Create output directory if needed
-        output_mid_path_yz=pathlib.Path('{}/mid_yz'.format(sp_dir))
-        output_mid_path_zx=pathlib.Path('{}/mid_zx'.format(sp_dir))
-        output_mid_path_xy=pathlib.Path('{}/mid_xy'.format(sp_dir))
-        output_avg_path_yz=pathlib.Path('{}/avg_yz'.format(sp_dir))
-        output_avg_path_zx=pathlib.Path('{}/avg_zx'.format(sp_dir))
-        output_avg_path_xy=pathlib.Path('{}/avg_xy'.format(sp_dir))
-        output_path_avg   =pathlib.Path('{}/profiles_avg'.format(sp_dir))
+        output_mid_path_yz=pathlib.Path('{}mid_yz'.format(sp_dir))
+        output_mid_path_zx=pathlib.Path('{}mid_zx'.format(sp_dir))
+        output_mid_path_xy=pathlib.Path('{}mid_xy'.format(sp_dir))
+        output_avg_path_yz=pathlib.Path('{}avg_yz'.format(sp_dir))
+        output_avg_path_zx=pathlib.Path('{}avg_zx'.format(sp_dir))
+        output_avg_path_xy=pathlib.Path('{}avg_xy'.format(sp_dir))
+        output_path_avg   =pathlib.Path('{}profiles_avg'.format(sp_dir))
 
+        print(output_mid_path_yz)
         with Sync() as sync:
             if sync.comm.rank == 0:
                 if not output_mid_path_yz.exists():
@@ -205,5 +206,6 @@ if __name__ == "__main__":
                 if not output_path_avg.exists():
                     output_path_avg.mkdir()
 
-        post.visit_writes(slicepoints, plot_all)
-        post.visit_writes(slicepoints, yzmean, output=output_path_avg)
+    sys.exit()
+        # post.visit_writes(slicepoints, plot_all)
+        # post.visit_writes(slicepoints, yzmean, output=output_path_avg)
