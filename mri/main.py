@@ -13,6 +13,7 @@ import pickle
 path = os.path.dirname(os.path.abspath(__file__))
 import sys
 sys.path.append(path + "/..")
+sys.path.append(path + "/../..")
 from OptimizationContext import OptimizationContext
 from Tracker import Tracker
 from Euler import Euler
@@ -41,18 +42,11 @@ from collections import OrderedDict
 from dedalus.core.future import FutureField
 
 from ConfigEval import ConfigEval
-try:
-    args = docopt(__doc__)
-    filename = Path(args['<config_file>'])
-except:
-    filename = path + '/new_config.cfg'
+
+filename = path + '/new_config.cfg'
 config = ConfigEval(filename)
 locals().update(config.execute_locals())
 logger.info('objective_overwrite = {}'.format(objective_overwrite))
-if (not os.path.isdir(path + '/' + suffix)):
-    logger.error('target state not found')
-    sys.exit()
-
 doSBI = False
 # if (args['<SBI_config>'] != None):
 #     logger.info('SBI config provided. Overwriting default config for simple backward integration...')
@@ -153,7 +147,7 @@ class Optimization3D(*Features):
     def write_txt(self, tag='', scales=1):
         self.ic['u'].change_scales(scales)
         approx = self.ic['u'].allgather_data(layout=self.dist_layout).flatten().copy()
-        savedir = path + '/' + suffix + '/checkpoints/{}write{:06}.txt'.format(tag, self.loop_index)
+        savedir = path + '/checkpoints/{}write{:06}.txt'.format(tag, self.loop_index)
         if (CW.rank == 0):
             np.savetxt(savedir, approx)
 
@@ -192,7 +186,7 @@ class Optimization3D(*Features):
         self.write_txt()
         if sp_sim_dt != 0 :
             # fh_mode = 'overwrite'
-            slicepoints = forward_solver.evaluator.add_file_handler(path + '/' + suffix + '/' + 'slicepoints_' + str(opt.loop_index), sim_dt=sp_sim_dt, max_writes=300, mode="overwrite")
+            slicepoints = forward_solver.evaluator.add_file_handler(path + '/' + 'slicepoints_' + str(opt.loop_index), sim_dt=sp_sim_dt, max_writes=300, mode="overwrite")
             for field, field_name in [(b, 'b'), ((u), 'v'), (d3.curl(b), 'j')]:
                 for d2, unit_vec in zip(('x', 'y', 'z'), (ex, ey, ez)):
                     slicepoints.add_task(d3.dot(field, unit_vec)(x = 'center'), name = "{}{}_mid{}".format(field_name, d2, 'x'))
@@ -243,7 +237,7 @@ opt.opt_layout = opt_layout
 opt.opt_scales = opt_scales
 opt.add_handlers = add_handlers
 opt.handler_loop_cadence = handler_loop_cadence
-opt.opt_fields = [u, A]
+opt.opt_fields = [A]
 
 opt.init_layout(lagrangian_dict)
 
@@ -273,7 +267,7 @@ Beta = dist.VectorField(coords, name='Beta', bases=bases)
 
 objt_ic = dist.Field(name='objt_ic', bases=bases)
 objt_ic['g'] = 0.0
-end_state_path = path + '/' + suffix + '/checkpoint_target/checkpoint_target_s1.h5'
+end_state_path = path + '/checkpoint_target/checkpoint_target_s1.h5'
 with h5py.File(end_state_path) as f:
     U['g'] = f['tasks/u'][-1, :, :][:, slices_grid[0], slices_grid[1]]
     Alpha['g'] = f['tasks/A'][-1, :, :][:, slices_grid[0], slices_grid[1]]
@@ -314,10 +308,17 @@ except:
     logger.info('set_objectiveT failed')
     opt.objectiveT = objectiveT
     opt.backward_ic = OrderedDict()
-    opt.backward_ic['u_t'] = -(u - U)
-    opt.backward_ic['A_t'] = -(A - Alpha)
+    if u in opt.opt_fields:
+        opt.backward_ic['u_t'] = -(u - U)
+    else:
+        opt.backward_ic['u_t'] = 0
+    if A in opt.opt_fields:
+        opt.backward_ic['A_t'] = -(A - Alpha)
+    else:
+        opt.backward_ic['A_t'] = 0
+    # opt.backward_ic['A_t'] = -(A - Alpha)
 
-# 'bar' quantities refer to the target initial condition (ubar is the minimizer we want to approximate)
+# 'bar' quantities refer to the target initial condition (u_bar is the minimizer we want to approximate)
 p_bar    = dist.Field(name='p_bar', bases=bases)
 phi_bar  = dist.Field(name='phi_bar', bases=bases)
 u_bar    = dist.VectorField(coords, name='u_bar', bases=bases)
@@ -326,6 +327,7 @@ A_bar    = dist.VectorField(coords, name='A_bar', bases=bases)
 u_bar['g'][1] = 1/2 + 1/2 * (np.tanh((z-Lz/4)/0.1) - np.tanh((z-3*Lz/4)/0.1))
 u_bar['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-Lz/4)**2/0.01)
 u_bar['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-3*Lz/4)**2/0.01)
+
 A_bar['g'][1] = 1/200 * (np.tanh((z-Lz/4)/0.1) - np.tanh((z-3*Lz/4)/0.1))
 A_bar['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-Lz/4)**2/0.01)
 A_bar['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-3*Lz/4)**2/0.01)
@@ -334,7 +336,7 @@ A_bar['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-3*Lz/4)**2/0.01)
 # Ac_data = clean_div(domain, coords, A_bar['g'].copy())
 
 cadence = show_loop_cadence
-tracker_dir = path + '/' + suffix + '/tracker.pick'
+tracker_dir = path + '/tracker.pick'
 if (load_state):
     try:
         opt.load_tracker(tracker_dir, 1, cadence)
@@ -378,14 +380,14 @@ if (False):
 # if (load_state):
     try:
         try:
-            write_fn = path + '/' + suffix + '/checkpoints/write{:06}.txt'.format(opt.loop_index)
+            write_fn = path + '/checkpoints/write{:06}.txt'.format(opt.loop_index)
             loadu = np.loadtxt(write_fn).copy()
             logger.info('loaded state in alignment with tracker: {}'.format(write_fn))
         except:
             logger.info('couldnt find state in alignment with tracker: {}'.format(write_fn))
-            write_names = [name for name in os.listdir(path + '/' + suffix + '/checkpoints/') if '.txt' in name]
+            write_names = [name for name in os.listdir(path + '/checkpoints/') if '.txt' in name]
             from natsort import natsorted
-            write_fn = path + '/' + suffix + '/checkpoints/' + natsorted(write_names)[-1]
+            write_fn = path + '/checkpoints/' + natsorted(write_names)[-1]
             loadu = np.loadtxt(write_fn).copy()
             logger.info('loaded most recent state: {}'.format(write_fn))
         opt.ic['u']['c'] = opt.reshape_soln(loadu, slices=slices, scales=1)
@@ -395,7 +397,7 @@ if (False):
 else:
 
     try:
-        sbi = np.loadtxt(path + '/' + suffix  + '/SBI.txt').copy()
+        sbi = np.loadtxt(path  + '/SBI.txt').copy()
         opt.ic['u'][opt_layout] = opt.reshape_soln(sbi, slices=slices, scales=1)
         logger.info('initial guess loaded from SBI')
     except Exception as e:
@@ -404,8 +406,8 @@ else:
         # opt.ic['u']['g'] = u_bar['g'].copy()
         if (guide_coeff > 0):
             logger.info('initializating optimization loop with guide coefficient {}'.format(guide_coeff))
-            opt.ic['u']['c'] = guide_coeff*ubar['c'].copy()
-            logger.info('initial guess set to guide_coeff*ubar')
+            opt.ic['u']['c'] = guide_coeff*u_bar['c'].copy()
+            logger.info('initial guess set to guide_coeff*u_bar')
 
 if (method == "euler"):
     method = opt.descend

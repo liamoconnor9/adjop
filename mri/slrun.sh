@@ -99,7 +99,7 @@ fi
 
 
 mkdir $suffix
-# mkdir $suffix/data
+mkdir $suffix/checkpoints
 cp $CONFIG $suffix
 cp $SOLVER $suffix
 cp $TARGET $suffix
