@@ -88,6 +88,7 @@ elif [[ "$skip_target" == "True" ]] || [[ "$skip_target" == "1" ]]; then
 else
     # python3 make_dirs.py $CONFIG
     mpiexec -n 16 python3 target.py $CONFIG
+    exit 1
     # $MPIPREFFIX $MPIPROC python3 target.py $CONFIG
     if [[ "$show" == "True" ]] || [[ "$show" == "1" ]]; then
         echo "PERFORMING TARGET SNAPSHOT PROCESSING ..."
