@@ -111,15 +111,15 @@ A['g'][1] = (x-0.5)*(x+0.5)/10 * (np.tanh((z-Lz/4)/0.1) - np.tanh((z-3*Lz/4)/0.1
 A['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-Lz/4)**2/0.01)
 A['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-3*Lz/4)**2/0.01)
 
-logger.info('divergence cleaning...')
-from clean_div3d import clean_div3d
+# logger.info('divergence cleaning...')
+# from clean_div3d import clean_div3d
 
-udata_dirty = u['g'].copy()
-Adata_dirty = A['g'].copy()
+# udata_dirty = u['g'].copy()
+# Adata_dirty = A['g'].copy()
 
-udata_clean = clean_div3d(domain, coords, udata_dirty)
-Adata_clean = clean_div3d(domain, coords, Adata_dirty)
-sys.exit()
+# udata_clean = clean_div3d(domain, coords, udata_dirty)
+# Adata_clean = clean_div3d(domain, coords, Adata_dirty)
+# sys.exit()
 
 # A['g'][1] = 1/200 * (np.tanh((z-0.5)/0.1) - np.tanh((z+0.5)/0.1))
 # A['g'][2] += 0.1 * np.sin(2*np.pi*y/Ly) * np.exp(-(z-0.5)**2/0.01)
